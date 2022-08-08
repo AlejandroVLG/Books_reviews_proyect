@@ -74,7 +74,7 @@ class AuthController extends Controller
             $token = JWTAuth::fromUser($user);
 
             return response()->json(compact('user', 'token'), 201);
-            
+
         } catch (\Exception $exception) {
 
             Log::error("Error registering new user: " . $exception->getMessage());
@@ -125,11 +125,6 @@ class AuthController extends Controller
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
-    }
-
-    public function me()
-    {
-        return response()->json(auth()->user());;
     }
 
     public function logout(Request $request)
