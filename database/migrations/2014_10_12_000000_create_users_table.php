@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            
+
             $table->id();
             $table->string('name');
             $table->string('last_name');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('favourite_author');
             $table->string('favourite_genre');
-            $table->string('currently_readying');
+            $table->string('currently_reading');
             $table->string('facebook_account')->unique();
             $table->string('twitter_account')->unique();
             $table->string('instagram_account')->unique();

@@ -10,6 +10,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
+    const ROLE_USER = 1;
     const ROLE_ADMIN = 2;
     const ROLE_SUPER_ADMIN = 3;
 
@@ -17,12 +18,19 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
+            'last_name' => 'string|max:100',
             'nick_name' => 'required|string|max:100',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
             'gender' => 'string|min:4|max:6',
-            'age' => 'integer|max:3',
+            'age' => 'integer|max:200',
             'country' => 'string',
+            'favourite_author' => 'string',
+            'favourite_genre' => 'string',
+            'currently_reading' => 'string',
+            'facebook_account' => 'string',
+            'twitter_account' => 'string',
+            'instagram_account' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -31,13 +39,27 @@ class AuthController extends Controller
 
         $user = User::create([
             'name' => $request->get('name'),
+            'last_name' => $request->get('last_name'),
+            'nick_name' => $request->get('nick_name'),
             'email' => $request->get('email'),
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'gender' => $request->get('gender'),
+            'age' => $request->get('age'),
+            'country' => $request->get('country'),
+            'favourite_author' => $request->get('favourite_author'),
+            'favourite_genre' => $request->get('favourite_genre'),
+            'currently_reading' => $request->get('currently_reading'),
+            'facebook_account' => $request->get('facebook_account'),
+            'twitter_account' => $request->get('twitter_account'),
+            'instagram_account' => $request->get('instagram_account'),
         ]);
         $users = User::all();
         if (count($users) == 1) {
             $user->roles()->attach(self::ROLE_ADMIN);
             $user->roles()->attach(self::ROLE_SUPER_ADMIN);
+        } else {
+            $user->roles()->attach(self::ROLE_USER);
+
         }
 
         $token = JWTAuth::fromUser($user);
