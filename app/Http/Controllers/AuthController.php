@@ -10,12 +10,19 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
+    const ROLE_ADMIN = 2;
+    const ROLE_SUPER_ADMIN = 3;
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
+            'nick_name' => 'required|string|max:100',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
+            'gender' => 'string|min:4|max:6',
+            'age' => 'integer|max:3',
+            'country' => 'string',
         ]);
 
         if ($validator->fails()) {
@@ -27,6 +34,11 @@ class AuthController extends Controller
             'email' => $request->get('email'),
             'password' => bcrypt($request->password)
         ]);
+        $users = User::all();
+        if (count($users) == 1) {
+            $user->roles()->attach(self::ROLE_ADMIN);
+            $user->roles()->attach(self::ROLE_SUPER_ADMIN);
+        }
 
         $token = JWTAuth::fromUser($user);
 
