@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -16,73 +17,114 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:100',
-            'last_name' => 'string|max:100',
-            'nick_name' => 'required|string|max:100',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-            'gender' => 'string|min:4|max:6',
-            'age' => 'integer|max:200',
-            'country' => 'string',
-            'favourite_author' => 'string',
-            'favourite_genre' => 'string',
-            'currently_reading' => 'string',
-            'facebook_account' => 'string',
-            'twitter_account' => 'string',
-            'instagram_account' => 'string'
-        ]);
+        try {
+            Log::info('creating new user');
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:100',
+                'last_name' => 'string|max:100',
+                'nick_name' => 'required|string|max:100',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6',
+                'gender' => 'string|min:4|max:6',
+                'age' => 'integer|max:200',
+                'country' => 'string',
+                'favourite_author' => 'string',
+                'favourite_genre' => 'string',
+                'currently_reading' => 'string',
+                'facebook_account' => 'string',
+                'twitter_account' => 'string',
+                'instagram_account' => 'string'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors()->toJson(), 400);
+            }
+
+            $user = User::create([
+                'name' => $request->get('name'),
+                'last_name' => $request->get('last_name'),
+                'nick_name' => $request->get('nick_name'),
+                'email' => $request->get('email'),
+                'password' => bcrypt($request->password),
+                'gender' => $request->get('gender'),
+                'age' => $request->get('age'),
+                'country' => $request->get('country'),
+                'favourite_author' => $request->get('favourite_author'),
+                'favourite_genre' => $request->get('favourite_genre'),
+                'currently_reading' => $request->get('currently_reading'),
+                'facebook_account' => $request->get('facebook_account'),
+                'twitter_account' => $request->get('twitter_account'),
+                'instagram_account' => $request->get('instagram_account'),
+            ]);
+
+            // Por defecto se asigna al primer usuario creado los roles "Admin" y "Super_Admin", apartir de ahí
+            // a todos los demás usarios se le asignará automáticamente el role de "User"
+
+            $users = User::all();
+            if (count($users) == 1) {
+
+                $user->roles()->attach(self::ROLE_ADMIN);
+                $user->roles()->attach(self::ROLE_SUPER_ADMIN);
+
+            } else {
+                $user->roles()->attach(self::ROLE_USER);
+            }
+
+            $token = JWTAuth::fromUser($user);
+
+            return response()->json(compact('user', 'token'), 201);
+            
+        } catch (\Exception $exception) {
+
+            Log::error("Error registering new user: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Error registering new user'
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
-
-        $user = User::create([
-            'name' => $request->get('name'),
-            'last_name' => $request->get('last_name'),
-            'nick_name' => $request->get('nick_name'),
-            'email' => $request->get('email'),
-            'password' => bcrypt($request->password),
-            'gender' => $request->get('gender'),
-            'age' => $request->get('age'),
-            'country' => $request->get('country'),
-            'favourite_author' => $request->get('favourite_author'),
-            'favourite_genre' => $request->get('favourite_genre'),
-            'currently_reading' => $request->get('currently_reading'),
-            'facebook_account' => $request->get('facebook_account'),
-            'twitter_account' => $request->get('twitter_account'),
-            'instagram_account' => $request->get('instagram_account'),
-        ]);
-        $users = User::all();
-        if (count($users) == 1) {
-            $user->roles()->attach(self::ROLE_ADMIN);
-            $user->roles()->attach(self::ROLE_SUPER_ADMIN);
-        } else {
-            $user->roles()->attach(self::ROLE_USER);
-
-        }
-
-        $token = JWTAuth::fromUser($user);
-
-        return response()->json(compact('user', 'token'), 201);
     }
 
     public function login(Request $request)
     {
-        $input = $request->only('email', 'password');
-        $jwt_token = null;
+        try {
+            Log::info('login user');
 
-        if (!$jwt_token = JWTAuth::attempt($input)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid Email or Password',
-            ], Response::HTTP_UNAUTHORIZED);
+            $input = $request->only('email', 'password');
+            $jwt_token = null;
+
+            if (!$jwt_token = JWTAuth::attempt($input)) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Invalid Email or Password',
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'token' => $jwt_token,
+                ]
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error login user: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Error login user'
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
-
-        return response()->json([
-            'success' => true,
-            'token' => $jwt_token,
-        ]);
     }
 
     public function me()
@@ -92,20 +134,26 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $this->validate($request, [
-            'token' => 'required'
-        ]);
         try {
+            Log::info('Trying log out');
+
             JWTAuth::invalidate($request->token);
-            return response()->json([
-                'success' => true,
-                'message' => 'User logged out successfully'
-            ]);
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'User logged out successfully'
+                ]
+            );
         } catch (\Exception $exception) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Sorry, the user cannot be logged out'
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Sorry, the user cannot be logged out'
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
     }
 }

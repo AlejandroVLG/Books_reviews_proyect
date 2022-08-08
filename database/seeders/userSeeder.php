@@ -28,7 +28,7 @@ class userSeeder extends Seeder
                 'country' => 'Spain',
                 'favourite_author' => 'Brandon Sanderson',
                 'favourite_genre' => 'Fantasy',
-                'currently_readying' => 'El archivo de las tormentas',
+                'currently_reading' => 'El archivo de las tormentas',
                 'facebook_account' => 'Alejandro@facebook.com',
                 'twitter_account' => 'Alejandro@twitter.com',
                 'instagram_account' => 'Alejandro@instagram.com'
@@ -46,7 +46,7 @@ class userSeeder extends Seeder
                 'country' => 'Spain',
                 'favourite_author' => 'Stephen King',
                 'favourite_genre' => 'Terror',
-                'currently_readying' => 'It',
+                'currently_reading' => 'It',
                 'facebook_account' => 'Jose@facebook.com',
                 'twitter_account' => 'Jose@twitter.com',
                 'instagram_account' => 'Jose@instagram.com'
@@ -64,7 +64,7 @@ class userSeeder extends Seeder
                 'country' => 'Spain',
                 'favourite_author' => 'Trudi Canavan',
                 'favourite_genre' => 'Comedy',
-                'currently_readying' => 'Trifulca a la vista',
+                'currently_reading' => 'Trifulca a la vista',
                 'facebook_account' => 'Maria@facebook.com',
                 'twitter_account' => 'Maria@twitter.com',
                 'instagram_account' => 'Maria@instagram.com'
