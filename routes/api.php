@@ -29,13 +29,11 @@ Route::group(["middleware" => "jwt.auth"], function () {
 
 Route::group(["middleware" => ["jwt.auth", "isAdmin"]], function () {
 
-    Route::post('/user/admin/{id}', [UserController::class, 'addAdminRoleToUser']);
-    Route::post('/user/admin_remove/{id}', [UserController::class, 'removeAdminRoleToUser']);
     Route::get('/user/getAllUsers', [UserController::class, 'getUsers']);
 });
 
 Route::group(["middleware" => ["jwt.auth", "isSuperAdmin"]], function () {
 
-    Route::post('/user/super_admin/{id}', [UserController::class, 'addSuperAdminRoleToUser']);
-    Route::post('/user/super_admin_remove/{id}', [UserController::class, 'removeSuperAdminRoleToUser']);
+    Route::post('/user/admin/{id}', [UserController::class, 'addAdminRoleToUser']);
+    Route::post('/user/admin_remove/{id}', [UserController::class, 'removeAdminRoleToUser']);
 });

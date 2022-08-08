@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
-{
+{   
+    const ROLE_ADMIN = 2;
+    
     public function getUsers()
     {
         try {
@@ -44,7 +46,6 @@ class UserController extends Controller
             Log::info('Showing my profile');
 
             return response()->json(auth()->user());;
-
         } catch (Exception $exception) {
 
             Log::error("Error showing my profile" . $exception->getMessage());
@@ -55,6 +56,72 @@ class UserController extends Controller
                     'message' => "Error showing my profile"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////////<------------------- ADD ADMIN ROLE ----------------->///////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function addAdminRoleToUser($id)
+    {
+        try {
+
+            $user = User::find($id);
+
+            $user->roles()->attach(self::ROLE_ADMIN);
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => "Admin role added"
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error updating Admin role: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error adding Admin role"
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////////<----------------- REMOVE ADMIN ROLE ---------------->///////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function removeAdminRoleToUser($id)
+    {
+        try {
+
+            $user = User::find($id);
+
+            $user->roles()->detach(self::ROLE_ADMIN);
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => "Admin role removed"
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error removing Admin role: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Admin role removed"
+                ],
+                500
             );
         }
     }
