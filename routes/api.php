@@ -23,6 +23,7 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::get('book/showAllBooks', [BookController::class, 'showAllBooks']);
     Route::post('book/createBook', [BookController::class, 'createBook']);
     Route::put('book/editBookById/{id}', [BookController::class, 'editBookById']);
+   
 
 });
 
@@ -31,6 +32,7 @@ Route::group(["middleware" => "jwt.auth"], function () {
 Route::group(["middleware" => ["jwt.auth", "isAdmin"]], function () {
 
     Route::get('/user/getAllUsers', [UserController::class, 'getUsers']);
+    Route::delete('book/deleteBook/{id}', [BookController::class, 'deleteBook']);
 });
 
 ////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isSuperAdmin" ////////////////////

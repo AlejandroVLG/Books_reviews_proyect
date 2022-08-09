@@ -69,7 +69,7 @@ class BookController extends Controller
             Log::info("Creating a book");
 
             $validator = Validator::make($request->all(), [
-                'title' => ['required', 'string'],
+                'title' => ['required', 'string', 'unique:books'],
                 'synopsis' => ['required', 'string'],
                 'series' => ['required', 'string'],
                 'author' => ['required', 'string'],
@@ -147,7 +147,7 @@ class BookController extends Controller
             Log::info('Updating Book');
 
             $validator = Validator::make($request->all(), [
-                'title' => 'string',
+                'title' => ['string', 'unique:books'],
                 'synopsis' => 'string',
                 'series' => 'string',
                 'author' => 'string',
@@ -176,7 +176,7 @@ class BookController extends Controller
                 return response()->json(
                     [
                         'success' => false,
-                        'message' => "Channel doesn't exists"
+                        'message' => "Book doesn't exists"
                     ],
                     404
                 );
@@ -225,7 +225,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => "Book " . $userId . " changed"
+                    'message' => "Book " . $id . " changed"
                 ],
                 200
             );
@@ -236,7 +236,51 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error modifing the book"
+                    'message' => "Error modifing the book " . $id
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    //////////////<------------------- DELETE BOOK ------------------>///////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function deleteBook($id)
+    {
+        try {
+            Log::info('Deleting book');
+
+            $book = Book::query()->find($id);
+
+            if (!$book) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => "Book doesn't exists"
+                    ],
+                    404
+                );
+            }
+            
+            $book->delete($id);
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => "Book " . $id . " deleted"
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error deleting the bookb: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error deleting the book"
                 ],
                 500
             );
