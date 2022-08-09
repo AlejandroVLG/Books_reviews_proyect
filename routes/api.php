@@ -21,6 +21,10 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::delete('user/deleteMyProfile', [UserController::class, 'deleteMyProfile']);
 
     Route::get('book/showAllBooks', [BookController::class, 'showAllBooks']);
+    Route::get('book/searchBookByTitle/{title}', [BookController::class, 'searchBookByTitle']);
+    Route::get('book/searchBookByAuthor/{author}', [BookController::class, 'searchBookByAuthor']);
+    Route::get('book/searchBookBySeries/{series}', [BookController::class, 'searchBookBySeries']);
+    Route::get('book/searchBookByYear/{year}', [BookController::class, 'searchBookByYear']);
     Route::post('book/createBook', [BookController::class, 'createBook']);
     Route::put('book/editBookById/{id}', [BookController::class, 'editBookById']);
    

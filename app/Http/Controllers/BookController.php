@@ -45,6 +45,7 @@ class BookController extends Controller
                 ],
                 200
             );
+
         } catch (\Exception $exception) {
 
             Log::error("Error getting books: " . $exception->getMessage());
@@ -124,6 +125,7 @@ class BookController extends Controller
                 ],
                 200
             );
+
         } catch (\Exception $exception) {
             Log::error("Error creating " . $title . ", " . $exception->getMessage());
 
@@ -229,6 +231,7 @@ class BookController extends Controller
                 ],
                 200
             );
+
         } catch (\Exception $exception) {
 
             Log::error("Error modifing the book: " . $exception->getMessage());
@@ -263,7 +266,7 @@ class BookController extends Controller
                     404
                 );
             }
-            
+
             $book->delete($id);
 
             return response()->json(
@@ -273,6 +276,7 @@ class BookController extends Controller
                 ],
                 200
             );
+
         } catch (\Exception $exception) {
 
             Log::error("Error deleting the bookb: " . $exception->getMessage());
@@ -281,6 +285,266 @@ class BookController extends Controller
                 [
                     'success' => false,
                     'message' => "Error deleting the book"
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////<------------------- SEARCH BOOK BY TITLE ------------------>///////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function searchBookByTitle($title)
+    {
+        try {
+
+            Log::info("Getting filtered books by title");
+
+            $book = Book::query()
+                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->select(
+                    'Books.id',
+                    'Users.name',
+                    'Books.title',
+                    'Books.synopsis',
+                    'Books.series',
+                    'Books.author',
+                    'Books.genre',
+                    'Books.year',
+                    'Books.book_cover',
+                    'Books.author_wiki_url',
+                    'Books.shop_url'
+                )
+                ->where('title', 'LIKE', $title)
+                ->get()
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'books retrieved successfully',
+                    'data' => $book
+                ],
+                200
+            );
+
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting books: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting books"
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////<------------------- SEARCH BOOK BY AUTHOR ------------------>///////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function searchBookByAuthor($author)
+    {
+        try {
+
+            Log::info("Getting filtered books by author");
+
+            $book = Book::query()
+                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->select(
+                    'Books.id',
+                    'Users.name',
+                    'Books.title',
+                    'Books.synopsis',
+                    'Books.series',
+                    'Books.author',
+                    'Books.genre',
+                    'Books.year',
+                    'Books.book_cover',
+                    'Books.author_wiki_url',
+                    'Books.shop_url'
+                )
+                ->where('author', 'LIKE', $author)
+                ->get()
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'books retrieved successfully',
+                    'data' => $book
+                ],
+                200
+            );
+
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting books: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting books"
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////<------------------- SEARCH BOOK BY SERIES ------------------>///////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function searchBookBySeries($series)
+    {
+        try {
+
+            Log::info("Getting filtered books by series");
+
+            $book = Book::query()
+                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->select(
+                    'Books.id',
+                    'Users.name',
+                    'Books.title',
+                    'Books.synopsis',
+                    'Books.series',
+                    'Books.author',
+                    'Books.genre',
+                    'Books.year',
+                    'Books.book_cover',
+                    'Books.author_wiki_url',
+                    'Books.shop_url'
+                )
+                ->where('series', 'LIKE', $series)
+                ->get()
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'books retrieved successfully',
+                    'data' => $book
+                ],
+                200
+            );
+
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting books: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting books"
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////<------------------- SEARCH BOOK BY GENRE ------------------>////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function searchBookByGenre($genre)
+    {
+        try {
+
+            Log::info("Getting filtered books by genre");
+
+            $book = Book::query()
+                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->select(
+                    'Books.id',
+                    'Users.name',
+                    'Books.title',
+                    'Books.synopsis',
+                    'Books.series',
+                    'Books.author',
+                    'Books.genre',
+                    'Books.year',
+                    'Books.book_cover',
+                    'Books.author_wiki_url',
+                    'Books.shop_url'
+                )
+                ->where('genre', 'LIKE', $genre)
+                ->get()
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'books retrieved successfully',
+                    'data' => $book
+                ],
+                200
+            );
+
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting books: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting books"
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    //////////<------------------- SEARCH BOOK BY YEAR ------------------>///////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function searchBookByYear($year)
+    {
+        try {
+
+            Log::info("Getting filtered books by year");
+
+            $book = Book::query()
+                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->select(
+                    'Books.id',
+                    'Users.name',
+                    'Books.title',
+                    'Books.synopsis',
+                    'Books.series',
+                    'Books.author',
+                    'Books.genre',
+                    'Books.year',
+                    'Books.book_cover',
+                    'Books.author_wiki_url',
+                    'Books.shop_url'
+                )
+                ->where('year', 'LIKE', $year)
+                ->get()
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'books retrieved successfully',
+                    'data' => $book
+                ],
+                200
+            );
+            
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting books: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting books"
                 ],
                 500
             );

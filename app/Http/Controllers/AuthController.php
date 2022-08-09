@@ -66,6 +66,7 @@ class AuthController extends Controller
             // a todos los demás usarios se le asignará automáticamente el role de "User"
 
             $users = User::all();
+
             if (count($users) == 1) {
 
                 $user->roles()->attach(self::ROLE_ADMIN);
@@ -122,6 +123,7 @@ class AuthController extends Controller
                 ],
                 200
             );
+
         } catch (\Exception $exception) {
 
             Log::error("Error login user: " . $exception->getMessage());
@@ -154,6 +156,7 @@ class AuthController extends Controller
                 ],
                 200
             );
+            
         } catch (\Exception $exception) {
 
             return response()->json(
