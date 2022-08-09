@@ -57,4 +57,44 @@ class RoleController extends Controller
             );
         }
     }
+
+    public function deleteRole($id)
+    {
+        try {
+            Log::info('Deleting Role');
+
+            $role = Role::query()->find($id);
+
+            if (!$role) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => "Role doesn't exists"
+                    ],
+                    404
+                );
+            }
+
+            $role->delete();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => "Role " . $id . " deleted"
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error deleting role: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error deleting role"
+                ],
+                500
+            );
+        }
+    }
 }

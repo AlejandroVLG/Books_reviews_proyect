@@ -6,36 +6,34 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/newRole', [RoleController::class, 'newRole']);
+
+////////// ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN ////////////////////
 
 Route::group(["middleware" => "jwt.auth"], function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('user/myProfile', [UserController::class, 'showProfile']);
+    Route::get('user/myProfile', [UserController::class, 'showMyProfile']);
     Route::put('user/editMyProfile', [UserController::class, 'editMyProfile']);
     Route::delete('user/deleteMyProfile', [UserController::class, 'deleteMyProfile']);
 });
+
+////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isAdmin" ////////////////////
 
 Route::group(["middleware" => ["jwt.auth", "isAdmin"]], function () {
 
     Route::get('/user/getAllUsers', [UserController::class, 'getUsers']);
 });
 
+////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isSuperAdmin" ////////////////////
+
 Route::group(["middleware" => ["jwt.auth", "isSuperAdmin"]], function () {
 
+    Route::post('/role/newRole', [RoleController::class, 'newRole']);
+    Route::delete('/role/deleteRole/{id}', [RoleController::class, 'deleteRole']);
+
     Route::post('/user/admin/{id}', [UserController::class, 'addAdminRoleToUser']);
-    Route::post('/user/admin_remove/{id}', [UserController::class, 'removeAdminRoleToUser']);
+    Route::delete('/user/admin_remove/{id}', [UserController::class, 'removeAdminRoleToUser']);
 });

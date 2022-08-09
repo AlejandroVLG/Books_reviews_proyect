@@ -14,6 +14,30 @@ class UserController extends Controller
     const ROLE_ADMIN = 2;
 
     /////////////////////////////////////////////////////////////////////////////////
+    //////////////<------------------- MY PROFILE ----------------->/////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function showMyProfile()
+    {
+        try {
+            Log::info('Showing my profile');
+
+            return response()->json(auth()->user(), 200);;
+        } catch (Exception $exception) {
+
+            Log::error("Error showing my profile" . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error showing my profile"
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
     ////////////<------------------- SHOW ALL USERS ----------------->///////////////
     /////////////////////////////////////////////////////////////////////////////////
 
@@ -174,24 +198,45 @@ class UserController extends Controller
     }
 
     /////////////////////////////////////////////////////////////////////////////////
-    //////////////<------------------- MY PROFILE ----------------->/////////////////
+    ///////////<------------------- DELETE MY PROFILE ------------------>////////////
     /////////////////////////////////////////////////////////////////////////////////
 
-    public function showProfile()
+    public function deleteMyProfile()
     {
         try {
-            Log::info('Showing my profile');
+            Log::info('Deleting User profile');
 
-            return response()->json(auth()->user(), 200);;
+            $user_id = auth()->user()->id;
 
-        } catch (Exception $exception) {
+            $user = User::query()->find($user_id);
 
-            Log::error("Error showing my profile" . $exception->getMessage());
+            if (!$user) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => "User doesn't exists"
+                    ],
+                    404
+                );
+            }
+
+            $user->delete();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => "User " . $user_id . " profile deleted"
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error deleting profile: " . $exception->getMessage());
 
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error showing my profile"
+                    'message' => "Error deleting profile"
                 ],
                 500
             );
@@ -263,51 +308,4 @@ class UserController extends Controller
             );
         }
     }
-
-    /////////////////////////////////////////////////////////////////////////////////
-    ///////////<------------------- DELETE USER BY ID ------------------>////////////
-    /////////////////////////////////////////////////////////////////////////////////
-
-    public function deleteMyProfile()
-    {
-        try {
-            Log::info('Deleting User');
-
-            $user_id = auth()->user()->id;
-
-            $user = User::query()->find($user_id);
-
-            if (!$user) {
-                return response()->json(
-                    [
-                        'success' => false,
-                        'message' => "User doesn't exists"
-                    ],
-                    404
-                );
-            }
-
-            $user->delete();
-
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => "User " . $user_id . " profile deleted"
-                ],
-                200
-            );
-        } catch (\Exception $exception) {
-
-            Log::error("Error deleting the user: " . $exception->getMessage());
-
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => "Error deleting the user"
-                ],
-                500
-            );
-        }
-    }
-
 }
