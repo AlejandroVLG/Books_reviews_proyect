@@ -26,6 +26,7 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('user/myProfile', [UserController::class, 'showProfile']);
     Route::put('user/editMyProfile', [UserController::class, 'editMyProfile']);
+    Route::delete('user/deleteMyProfile', [UserController::class, 'deleteMyProfile']);
 });
 
 Route::group(["middleware" => ["jwt.auth", "isAdmin"]], function () {

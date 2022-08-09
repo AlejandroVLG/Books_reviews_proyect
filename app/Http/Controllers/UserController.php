@@ -62,7 +62,7 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'string|max:100',
                 'last_name' => 'string|max:100',
-                'nick_name' => 'string|max:100',
+                'nick_name' => 'string|max:100|unique:users',
                 'email' => 'string|email|max:255|unique:users',
                 'password' => 'string|min:6',
                 'gender' => 'string|min:4|max:6',
@@ -263,4 +263,51 @@ class UserController extends Controller
             );
         }
     }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ///////////<------------------- DELETE USER BY ID ------------------>////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function deleteMyProfile()
+    {
+        try {
+            Log::info('Deleting User');
+
+            $user_id = auth()->user()->id;
+
+            $user = User::query()->find($user_id);
+
+            if (!$user) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => "User doesn't exists"
+                    ],
+                    404
+                );
+            }
+
+            $user->delete();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => "User " . $user_id . " profile deleted"
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error deleting the user: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error deleting the user"
+                ],
+                500
+            );
+        }
+    }
+
 }
