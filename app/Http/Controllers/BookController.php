@@ -9,8 +9,57 @@ use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
-        /////////////////////////////////////////////////////////////////////////////////
-    /////////<------------------- CREATE A NEW GAME ------------------>//////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////////<------------------- SHOW ALL BOOKS ------------------>//////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function showAllBooks()
+    {
+        try {
+
+            Log::info("Getting all books");
+
+            $books = Book::query()
+                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->select(
+                    'Books.id',
+                    'Users.name',
+                    'Books.title',
+                    'Books.synopsis',
+                    'Books.series',
+                    'Books.author',
+                    'Books.genre',
+                    'Books.year',
+                    'Books.book_cover',
+                    'Books.author_wiki_url',
+                    'Books.shop_url'
+                )
+                ->get();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'books retrieved successfully',
+                    'data' => $books
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting books: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting books"
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////<------------------- CREATE A NEW BOOK ------------------>//////////////
     /////////////////////////////////////////////////////////////////////////////////
 
     public function createBook(Request $request)
@@ -66,7 +115,6 @@ class BookController extends Controller
             $book->shop_url = $shopUrl;
 
             $book->save();
-
 
             return response()->json(
                 [

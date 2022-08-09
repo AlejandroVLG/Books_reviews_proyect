@@ -20,6 +20,7 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::put('user/editMyProfile', [UserController::class, 'editMyProfile']);
     Route::delete('user/deleteMyProfile', [UserController::class, 'deleteMyProfile']);
 
+    Route::get('book/showAllBooks', [BookController::class, 'showAllBooks']);
     Route::post('book/createBook', [BookController::class, 'createBook']);
 
 });
