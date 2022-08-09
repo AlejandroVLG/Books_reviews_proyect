@@ -84,7 +84,7 @@ class AuthController extends Controller
                     'success' => false,
                     'message' => 'Error registering new user'
                 ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
+                500
             );
         }
     }
@@ -111,7 +111,8 @@ class AuthController extends Controller
                 [
                     'success' => true,
                     'token' => $jwt_token,
-                ]
+                ],
+                200
             );
         } catch (\Exception $exception) {
 
@@ -122,7 +123,7 @@ class AuthController extends Controller
                     'success' => false,
                     'message' => 'Error login user'
                 ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
+                500
             );
         }
     }
@@ -138,7 +139,8 @@ class AuthController extends Controller
                 [
                     'success' => true,
                     'message' => 'User logged out successfully'
-                ]
+                ],
+                200
             );
         } catch (\Exception $exception) {
 
