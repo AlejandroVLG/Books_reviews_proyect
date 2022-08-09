@@ -47,7 +47,7 @@ class UserController extends Controller
 
             Log::info('Retrieving all users');
 
-            $users = User::all();
+            $users = User::all()->toArray();
 
             return response()->json(
                 [
