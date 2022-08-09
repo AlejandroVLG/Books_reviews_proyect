@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('series');
             $table->string('author');
             $table->string('genre');
-            $table->integer('year');
+            $table->string('year');
             $table->string('book_cover');
             $table->string('author_wiki_url');
             $table->string('shop_url');

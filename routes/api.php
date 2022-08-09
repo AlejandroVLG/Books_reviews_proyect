@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -18,6 +19,9 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::get('user/myProfile', [UserController::class, 'showMyProfile']);
     Route::put('user/editMyProfile', [UserController::class, 'editMyProfile']);
     Route::delete('user/deleteMyProfile', [UserController::class, 'deleteMyProfile']);
+
+    Route::post('book/createBook', [BookController::class, 'createBook']);
+
 });
 
 ////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isAdmin" ////////////////////
