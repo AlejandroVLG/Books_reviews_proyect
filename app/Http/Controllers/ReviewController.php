@@ -296,7 +296,7 @@ class ReviewController extends Controller
     ///////<------------- SHOW REVIEWS BY DESCENDENT ORDER ID ------------->/////////
     /////////////////////////////////////////////////////////////////////////////////
 
-    public function showReviewsOrderedByScore()
+    public function showReviewsOrderedByScoreDesc()
     {
         try {
             Log::info("Getting all reviews");
@@ -313,6 +313,52 @@ class ReviewController extends Controller
                     'Reviews.message'
                 )
                 ->orderBy('score', 'desc')
+                ->get()
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'reviews retrieved successfully',
+                    'data' => $reviews
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting reviews: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting reviews"
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ///////<------------- SHOW REVIEWS BY ASCENDENT ORDER ID ------------->/////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function showReviewsOrderedByScoreAsc()
+    {
+        try {
+            Log::info("Getting all reviews");
+
+            $reviews = Review::query()
+                ->join('Users', 'Reviews.user_id', '=', 'Users.id',)
+                ->join('Books', 'Reviews.book_id', '=', 'Books.id')
+                ->select(
+                    'Reviews.id',
+                    'Users.name',
+                    'Books.title',
+                    'Reviews.review_title',
+                    'Reviews.score',
+                    'Reviews.message'
+                )
+                ->orderBy('score', 'asc')
                 ->get()
                 ->toArray();
 

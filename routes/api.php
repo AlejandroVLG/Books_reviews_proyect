@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-////////// ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN ////////////////////
+///////////////// ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN //////////////////////
 
 Route::group(["middleware" => "jwt.auth"], function () {
 
@@ -34,10 +34,11 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::put('review/editReviewById/{id}', [ReviewController::class, 'editReviewById']);
     Route::delete('review/deleteReview/{id}', [ReviewController::class, 'deleteReview']);
     Route::get('review/searchReviewByUserName/{name}', [ReviewController::class, 'searchReviewByUserName']);
-    Route::get('review/showReviewsOrderedByScore', [ReviewController::class, 'showReviewsOrderedByScore']);
+    Route::get('review/showReviewsOrderedByScoreDesc', [ReviewController::class, 'showReviewsOrderedByScoreDesc']);
+    Route::get('review/showReviewsOrderedByScoreAsc', [ReviewController::class, 'showReviewsOrderedByScoreAsc']);
 });
 
-////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isAdmin" ////////////////////
+//////////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isAdmin" ///////////////////////
 
 Route::group(["middleware" => ["jwt.auth", "isAdmin"]], function () {
 
@@ -45,13 +46,13 @@ Route::group(["middleware" => ["jwt.auth", "isAdmin"]], function () {
     Route::delete('book/deleteBook/{id}', [BookController::class, 'deleteBook']);
 });
 
-////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isSuperAdmin" ////////////////////
+//////////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isSuperAdmin" ////////////////////
 
 Route::group(["middleware" => ["jwt.auth", "isSuperAdmin"]], function () {
 
     Route::post('/role/newRole', [RoleController::class, 'newRole']);
     Route::delete('/role/deleteRole/{id}', [RoleController::class, 'deleteRole']);
 
-    Route::post('/user/admin/{id}', [UserController::class, 'addAdminRoleToUser']);
-    Route::delete('/user/admin_remove/{id}', [UserController::class, 'removeAdminRoleToUser']);
+    Route::post('/user/newAdmin/{id}', [UserController::class, 'addAdminRoleToUser']);
+    Route::delete('/user/adminRemove/{id}', [UserController::class, 'removeAdminRoleToUser']);
 });
