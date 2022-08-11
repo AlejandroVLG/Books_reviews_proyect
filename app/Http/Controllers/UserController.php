@@ -47,7 +47,9 @@ class UserController extends Controller
 
             Log::info('Retrieving all users');
 
-            $users = User::all()->toArray();
+            $users = User::orderBy('name', 'asc')
+                ->get()
+                ->toArray();
 
             return response()->json(
                 [

@@ -33,6 +33,7 @@ class BookController extends Controller
                     'Books.author_wiki_url',
                     'Books.shop_url'
                 )
+                ->orderBy('title', 'asc')
                 ->get()
                 ->toArray();
 
@@ -363,6 +364,7 @@ class BookController extends Controller
                     'Books.shop_url'
                 )
                 ->where('author', '=', $author)
+                ->orderBy('title', 'asc')
                 ->get()
                 ->toArray();
 
@@ -414,6 +416,7 @@ class BookController extends Controller
                     'Books.shop_url'
                 )
                 ->where('series', '=', $series)
+                ->orderBy('title', 'asc')
                 ->get()
                 ->toArray();
 
@@ -465,6 +468,7 @@ class BookController extends Controller
                     'Books.shop_url'
                 )
                 ->where('genre', '=', $genre)
+                ->orderBy('author', 'asc')
                 ->get()
                 ->toArray();
 
@@ -516,6 +520,7 @@ class BookController extends Controller
                     'Books.shop_url'
                 )
                 ->where('year', '=', $year)
+                ->orderBy('title', 'asc')
                 ->get()
                 ->toArray();
 
