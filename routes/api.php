@@ -30,6 +30,7 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::put('book/editBookById/{id}', [BookController::class, 'editBookById']);
 
     Route::get('review/showAllReviews', [ReviewController::class, 'showAllReviews']);
+    Route::post('review/createReview', [ReviewController::class, 'createReview']);
 });
 
 ////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isAdmin" ////////////////////
