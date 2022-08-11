@@ -62,11 +62,10 @@ class AuthController extends Controller
                 'instagram_account' => $request->get('instagram_account'),
             ]);
 
+            $users = User::all();
+            
             // Por defecto se asigna al primer usuario creado los roles "Admin" y "Super_Admin", apartir de ahí
             // a todos los demás usarios se le asignará automáticamente el role de "User"
-
-            $users = User::all();
-
             if (count($users) == 1) {
 
                 $user->roles()->attach(self::ROLE_ADMIN);

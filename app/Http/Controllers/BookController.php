@@ -311,7 +311,7 @@ class BookController extends Controller
                     'Books.author_wiki_url',
                     'Books.shop_url'
                 )
-                ->where('title', 'LIKE', $title)
+                ->where('title', '=', $title)
                 ->get()
                 ->toArray();
 
@@ -362,7 +362,7 @@ class BookController extends Controller
                     'Books.author_wiki_url',
                     'Books.shop_url'
                 )
-                ->where('author', 'LIKE', $author)
+                ->where('author', '=', $author)
                 ->get()
                 ->toArray();
 
@@ -413,7 +413,7 @@ class BookController extends Controller
                     'Books.author_wiki_url',
                     'Books.shop_url'
                 )
-                ->where('series', 'LIKE', $series)
+                ->where('series', '=', $series)
                 ->get()
                 ->toArray();
 
@@ -464,7 +464,7 @@ class BookController extends Controller
                     'Books.author_wiki_url',
                     'Books.shop_url'
                 )
-                ->where('genre', 'LIKE', $genre)
+                ->where('genre', '=', $genre)
                 ->get()
                 ->toArray();
 
@@ -515,7 +515,7 @@ class BookController extends Controller
                     'Books.author_wiki_url',
                     'Books.shop_url'
                 )
-                ->where('year', 'LIKE', $year)
+                ->where('year', '=', $year)
                 ->get()
                 ->toArray();
 

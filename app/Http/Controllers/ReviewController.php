@@ -244,4 +244,51 @@ class ReviewController extends Controller
             );
         }
     }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ///////<------------------- SEARCH REVIEW BY USER ID ------------------>/////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function searchReviewByUserName($name)
+    {
+        try {
+
+            Log::info("Getting filtered reviews by user id");
+
+            $review = Review::query()
+                ->join('Users', 'Reviews.user_id', '=', 'Users.id',)
+                ->join('Books', 'Reviews.book_id', '=', 'Books.id')
+                ->select(
+                    'Reviews.id',
+                    'Users.name',
+                    'Books.title',
+                    'Reviews.review_title',
+                    'Reviews.score',
+                    'Reviews.message'
+                )
+                ->where('name', '=', $name)
+                ->get()
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'reviews retrieved successfully',
+                    'data' => $review
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting the reviews: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting the reviews"
+                ],
+                500
+            );
+        }
+    }
 }
