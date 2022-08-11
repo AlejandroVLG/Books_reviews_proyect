@@ -21,16 +21,17 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::put('user/editMyProfile', [UserController::class, 'editMyProfile']);
     Route::delete('user/deleteMyProfile', [UserController::class, 'deleteMyProfile']);
 
-    Route::get('book/showAllBooks', [BookController::class, 'showAllBooks']);
-    Route::get('book/searchBookByTitle/{title}', [BookController::class, 'searchBookByTitle']);
-    Route::get('book/searchBookByAuthor/{author}', [BookController::class, 'searchBookByAuthor']);
-    Route::get('book/searchBookBySeries/{series}', [BookController::class, 'searchBookBySeries']);
-    Route::get('book/searchBookByYear/{year}', [BookController::class, 'searchBookByYear']);
     Route::post('book/createBook', [BookController::class, 'createBook']);
+    Route::get('book/showAllBooks', [BookController::class, 'showAllBooks']);
     Route::put('book/editBookById/{id}', [BookController::class, 'editBookById']);
+    Route::get('book/searchBookByTitle/{title}', [BookController::class, 'searchBookByTitle']);
+    Route::get('book/searchBooksByAuthor/{author}', [BookController::class, 'searchBookByAuthor']);
+    Route::get('book/searchBooksBySeries/{series}', [BookController::class, 'searchBookBySeries']);
+    Route::get('book/searchBooksByGenre/{genre}', [BookController::class, 'searchBooksByGenre']);
+    Route::get('book/searchBookByYear/{year}', [BookController::class, 'searchBookByYear']);
 
-    Route::get('review/showAllReviews', [ReviewController::class, 'showAllReviews']);
     Route::post('review/createReview', [ReviewController::class, 'createReview']);
+    Route::get('review/showAllReviews', [ReviewController::class, 'showAllReviews']);
     Route::put('review/editReviewById/{id}', [ReviewController::class, 'editReviewById']);
     Route::delete('review/deleteReview/{id}', [ReviewController::class, 'deleteReview']);
     Route::get('review/searchReviewByUserName/{name}', [ReviewController::class, 'searchReviewByUserName']);

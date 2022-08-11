@@ -10,56 +10,6 @@ use Illuminate\Support\Facades\Validator;
 class BookController extends Controller
 {
     /////////////////////////////////////////////////////////////////////////////////
-    ////////////<------------------- SHOW ALL BOOKS ------------------>//////////////
-    /////////////////////////////////////////////////////////////////////////////////
-
-    public function showAllBooks()
-    {
-        try {
-            Log::info("Getting all books");
-
-            $books = Book::query()
-                ->join('Users', 'Books.user_id', '=', 'Users.id')
-                ->select(
-                    'Books.id',
-                    'Users.name',
-                    'Books.title',
-                    'Books.synopsis',
-                    'Books.series',
-                    'Books.author',
-                    'Books.genre',
-                    'Books.year',
-                    'Books.book_cover',
-                    'Books.author_wiki_url',
-                    'Books.shop_url'
-                )
-                ->orderBy('title', 'asc')
-                ->get()
-                ->toArray();
-
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'books retrieved successfully',
-                    'data' => $books
-                ],
-                200
-            );
-        } catch (\Exception $exception) {
-
-            Log::error("Error getting books: " . $exception->getMessage());
-
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => "Error getting books"
-                ],
-                500
-            );
-        }
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////
     /////////<------------------- CREATE A NEW BOOK ------------------>//////////////
     /////////////////////////////////////////////////////////////////////////////////
 
@@ -131,6 +81,56 @@ class BookController extends Controller
                 [
                     'success' => false,
                     'message' => "Error creating the book " . $title
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////////<------------------- SHOW ALL BOOKS ------------------>//////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function showAllBooks()
+    {
+        try {
+            Log::info("Getting all books");
+
+            $books = Book::query()
+                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->select(
+                    'Books.id',
+                    'Users.name',
+                    'Books.title',
+                    'Books.synopsis',
+                    'Books.series',
+                    'Books.author',
+                    'Books.genre',
+                    'Books.year',
+                    'Books.book_cover',
+                    'Books.author_wiki_url',
+                    'Books.shop_url'
+                )
+                ->orderBy('title', 'asc')
+                ->get()
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'books retrieved successfully',
+                    'data' => $books
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting books: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting books"
                 ],
                 500
             );
@@ -319,7 +319,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'books retrieved successfully',
+                    'message' => 'Books retrieved successfully',
                     'data' => $book
                 ],
                 200
@@ -339,10 +339,10 @@ class BookController extends Controller
     }
 
     /////////////////////////////////////////////////////////////////////////////////
-    ////////<------------------- SEARCH BOOK BY AUTHOR ------------------>///////////
+    ////////<------------------- SEARCH BOOKS BY AUTHOR ------------------>//////////
     /////////////////////////////////////////////////////////////////////////////////
 
-    public function searchBookByAuthor($author)
+    public function searchBooksByAuthor($author)
     {
         try {
 
@@ -371,7 +371,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'books retrieved successfully',
+                    'message' => 'Books retrieved successfully',
                     'data' => $book
                 ],
                 200
@@ -391,10 +391,10 @@ class BookController extends Controller
     }
 
     /////////////////////////////////////////////////////////////////////////////////
-    ////////<------------------- SEARCH BOOK BY SERIES ------------------>///////////
+    ////////<------------------- SEARCH BOOKS BY SERIES ------------------>//////////
     /////////////////////////////////////////////////////////////////////////////////
 
-    public function searchBookBySeries($series)
+    public function searchBooksBySeries($series)
     {
         try {
 
@@ -423,7 +423,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'books retrieved successfully',
+                    'message' => 'Books retrieved successfully',
                     'data' => $book
                 ],
                 200
@@ -443,10 +443,10 @@ class BookController extends Controller
     }
 
     /////////////////////////////////////////////////////////////////////////////////
-    ////////<------------------- SEARCH BOOK BY GENRE ------------------>////////////
+    ////////<------------------- SEARCH BOOKS BY GENRE ------------------>///////////
     /////////////////////////////////////////////////////////////////////////////////
 
-    public function searchBookByGenre($genre)
+    public function searchBooksByGenre($genre)
     {
         try {
 

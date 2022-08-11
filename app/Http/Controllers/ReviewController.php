@@ -10,51 +10,6 @@ use Illuminate\Support\Facades\Validator;
 class ReviewController extends Controller
 {
     /////////////////////////////////////////////////////////////////////////////////
-    ///////////<------------------- SHOW ALL REVIEWS ------------------>/////////////
-    /////////////////////////////////////////////////////////////////////////////////
-
-    public function showAllReviews()
-    {
-        try {
-            Log::info("Getting all reviews");
-
-            $reviews = Review::query()
-                ->join('Users', 'Reviews.user_id', '=', 'Users.id',)
-                ->join('Books', 'Reviews.book_id', '=', 'Books.id')
-                ->select(
-                    'Reviews.id',
-                    'Users.name',
-                    'Books.title',
-                    'Reviews.review_title',
-                    'Reviews.score',
-                    'Reviews.message'
-                )
-                ->get()
-                ->toArray();
-
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => 'reviews retrieved successfully',
-                    'data' => $reviews
-                ],
-                200
-            );
-        } catch (\Exception $exception) {
-
-            Log::error("Error getting reviews: " . $exception->getMessage());
-
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => "Error getting reviews"
-                ],
-                500
-            );
-        }
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////
     ////////<------------------- CREATE A NEW REVIEW ------------------>/////////////
     /////////////////////////////////////////////////////////////////////////////////
 
@@ -102,7 +57,7 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => "review " . $reviewTitle . " created"
+                    'message' => "Review " . $reviewTitle . " created"
                 ],
                 200
             );
@@ -113,6 +68,51 @@ class ReviewController extends Controller
                 [
                     'success' => false,
                     'message' => "Error creating the review " . $reviewTitle
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    ///////////<------------------- SHOW ALL REVIEWS ------------------>/////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function showAllReviews()
+    {
+        try {
+            Log::info("Getting all reviews");
+
+            $reviews = Review::query()
+                ->join('Users', 'Reviews.user_id', '=', 'Users.id',)
+                ->join('Books', 'Reviews.book_id', '=', 'Books.id')
+                ->select(
+                    'Reviews.id',
+                    'Users.name',
+                    'Books.title',
+                    'Reviews.review_title',
+                    'Reviews.score',
+                    'Reviews.message'
+                )
+                ->get()
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Reviews retrieved successfully',
+                    'data' => $reviews
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting the reviews: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error getting the reviews"
                 ],
                 500
             );
@@ -273,7 +273,7 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'reviews retrieved successfully',
+                    'message' => 'Reviews retrieved successfully',
                     'data' => $review
                 ],
                 200
@@ -299,7 +299,7 @@ class ReviewController extends Controller
     public function showReviewsOrderedByScoreDesc()
     {
         try {
-            Log::info("Getting all reviews");
+            Log::info("Getting all reviews ordered descendent");
 
             $reviews = Review::query()
                 ->join('Users', 'Reviews.user_id', '=', 'Users.id',)
@@ -319,19 +319,19 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'reviews retrieved successfully',
+                    'message' => 'Reviews retrieved successfully',
                     'data' => $reviews
                 ],
                 200
             );
         } catch (\Exception $exception) {
 
-            Log::error("Error getting reviews: " . $exception->getMessage());
+            Log::error("Error getting the reviews: " . $exception->getMessage());
 
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting reviews"
+                    'message' => "Error getting the reviews"
                 ],
                 500
             );
@@ -345,7 +345,7 @@ class ReviewController extends Controller
     public function showReviewsOrderedByScoreAsc()
     {
         try {
-            Log::info("Getting all reviews");
+            Log::info("Getting all reviews ordered ascendent");
 
             $reviews = Review::query()
                 ->join('Users', 'Reviews.user_id', '=', 'Users.id',)
@@ -365,19 +365,19 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'reviews retrieved successfully',
+                    'message' => 'Reviews retrieved successfully',
                     'data' => $reviews
                 ],
                 200
             );
         } catch (\Exception $exception) {
 
-            Log::error("Error getting reviews: " . $exception->getMessage());
+            Log::error("Error getting the reviews: " . $exception->getMessage());
 
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting reviews"
+                    'message' => "Error getting the reviews"
                 ],
                 500
             );
