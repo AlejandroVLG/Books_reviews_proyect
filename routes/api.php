@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -27,8 +28,8 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::get('book/searchBookByYear/{year}', [BookController::class, 'searchBookByYear']);
     Route::post('book/createBook', [BookController::class, 'createBook']);
     Route::put('book/editBookById/{id}', [BookController::class, 'editBookById']);
-   
 
+    Route::get('review/showAllReviews', [ReviewController::class, 'showAllReviews']);
 });
 
 ////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isAdmin" ////////////////////

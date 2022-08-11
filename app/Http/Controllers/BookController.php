@@ -16,7 +16,6 @@ class BookController extends Controller
     public function showAllBooks()
     {
         try {
-
             Log::info("Getting all books");
 
             $books = Book::query()
