@@ -71,7 +71,6 @@ class AuthController extends Controller
 
                 $user->roles()->attach(self::ROLE_ADMIN);
                 $user->roles()->attach(self::ROLE_SUPER_ADMIN);
-
             } else {
                 $user->roles()->attach(self::ROLE_USER);
             }
@@ -79,7 +78,6 @@ class AuthController extends Controller
             $token = JWTAuth::fromUser($user);
 
             return response()->json(compact('user', 'token'), 201);
-
         } catch (\Exception $exception) {
 
             Log::error("Error registering new user: " . $exception->getMessage());
@@ -123,7 +121,6 @@ class AuthController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error login user: " . $exception->getMessage());
@@ -156,7 +153,6 @@ class AuthController extends Controller
                 ],
                 200
             );
-            
         } catch (\Exception $exception) {
 
             return response()->json(

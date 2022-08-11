@@ -48,7 +48,6 @@ class RoleController extends Controller
                 ],
                 201
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error creating role: " . $exception->getMessage());
@@ -93,7 +92,6 @@ class RoleController extends Controller
                 ],
                 200
             );
-            
         } catch (\Exception $exception) {
 
             Log::error("Error deleting role: " . $exception->getMessage());

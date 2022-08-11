@@ -118,4 +118,130 @@ class ReviewController extends Controller
             );
         }
     }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    //////////<------------------- EDIT REVIEW BY ID------------------>//////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function editReviewById(Request $request, $id)
+    {
+        try {
+            Log::info('Updating a review');
+
+            $validator = Validator::make($request->all(), [
+                'book_id' => 'integer',
+                'review_title' => 'string',
+                'score' => 'integer',
+                'message' => 'string'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => $validator->errors()
+                    ],
+                    400
+                );
+            }
+
+            $userId = auth()->user()->id;
+
+            $review = Review::query()->where('user_id', '=', $userId)->find($id);
+
+            if (!$review) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => "Review doesn't exists"
+                    ],
+                    404
+                );
+            }
+
+            $bookId = $request->input('book_id');
+            $reviewTitle = $request->input('review_title');
+            $score = $request->input('score');
+            $message = $request->input('message');
+
+
+            if (isset($bookId)) {
+                $review->book_id = $bookId;
+            };
+            if (isset($synopsis)) {
+                $review->review_title = $reviewTitle;
+            };
+            if (isset($score)) {
+                $review->score = $score;
+            };
+            if (isset($message)) {
+                $review->message = $message;
+            };
+
+            $review->save();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => "Review " . $id . " changed"
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error modifing the review: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error modifing the reviewv " . $id
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////<------------------- DELETE REVIEW ------------------>//////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function deleteReview($id)
+    {
+        try {
+            Log::info('Deleting a review');
+
+            $review = Review::query()->find($id);
+
+            if (!$review) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => "Review doesn't exists"
+                    ],
+                    404
+                );
+            }
+
+            $review->delete($id);
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => "Review " . $id . " deleted"
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error deleting the review: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => "Error deleting the review"
+                ],
+                500
+            );
+        }
+    }
 }

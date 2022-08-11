@@ -23,7 +23,6 @@ class UserController extends Controller
             Log::info('Showing my profile');
 
             return response()->json(auth()->user(), 200);;
-
         } catch (Exception $exception) {
 
             Log::error("Error showing my profile" . $exception->getMessage());
@@ -57,7 +56,6 @@ class UserController extends Controller
                     'data' => $users
                 ]
             );
-
         } catch (Exception $exception) {
 
             Log::error("Error retrieveing users" . $exception->getMessage());
@@ -185,7 +183,6 @@ class UserController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error modifing User data: " . $exception->getMessage());
@@ -232,7 +229,6 @@ class UserController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error deleting profile: " . $exception->getMessage());
@@ -266,7 +262,6 @@ class UserController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error updating Admin role: " . $exception->getMessage());
@@ -300,7 +295,6 @@ class UserController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error removing Admin role: " . $exception->getMessage());

@@ -44,7 +44,6 @@ class BookController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error getting books: " . $exception->getMessage());
@@ -124,7 +123,6 @@ class BookController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
             Log::error("Error creating " . $title . ", " . $exception->getMessage());
 
@@ -230,7 +228,6 @@ class BookController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error modifing the book: " . $exception->getMessage());
@@ -275,10 +272,9 @@ class BookController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
-            Log::error("Error deleting the bookb: " . $exception->getMessage());
+            Log::error("Error deleting the book: " . $exception->getMessage());
 
             return response()->json(
                 [
@@ -327,7 +323,6 @@ class BookController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error getting books: " . $exception->getMessage());
@@ -379,7 +374,6 @@ class BookController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error getting books: " . $exception->getMessage());
@@ -431,7 +425,6 @@ class BookController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error getting books: " . $exception->getMessage());
@@ -483,7 +476,6 @@ class BookController extends Controller
                 ],
                 200
             );
-
         } catch (\Exception $exception) {
 
             Log::error("Error getting books: " . $exception->getMessage());
@@ -535,7 +527,6 @@ class BookController extends Controller
                 ],
                 200
             );
-            
         } catch (\Exception $exception) {
 
             Log::error("Error getting books: " . $exception->getMessage());
