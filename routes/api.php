@@ -42,7 +42,7 @@ Route::group(["middleware" => "jwt.auth"], function () {
 
 //////////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "IsAdmin" ///////////////////////
 
-Route::group(["middleware" => ["jwt.auth", "IsAdmin"]], function () {
+Route::group(["Middleware" => ["jwt.auth", "IsAdmin"]], function () {
     
     Route::get('/user/getAllUsers', [UserController::class, 'getUsers']);
     Route::delete('book/deleteBook/{id}', [BookController::class, 'deleteBook']);
@@ -50,7 +50,7 @@ Route::group(["middleware" => ["jwt.auth", "IsAdmin"]], function () {
 
 //////////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "IsSuperAdmin" ////////////////////
 
-Route::group(["middleware" => ["jwt.auth", "IsSuperAdmin"]], function () {
+Route::group(["Middleware" => ["jwt.auth", "IsSuperAdmin"]], function () {
 
     Route::post('/role/newRole', [RoleController::class, 'newRole']);
     Route::delete('/role/deleteRole/{id}', [RoleController::class, 'deleteRole']);
