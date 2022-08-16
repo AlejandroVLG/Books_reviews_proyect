@@ -41,10 +41,10 @@ Route::group(["middleware" => "jwt.auth"], function () {
 });
 
 //////////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "isAdmin" ///////////////////////
-Route::get('/user/getAllUsers', [UserController::class, 'getUsers']);
 
 Route::group(["middleware" => ["jwt.auth", "isAdmin"]], function () {
-
+    
+    Route::get('/user/getAllUsers', [UserController::class, 'getUsers']);
     Route::delete('book/deleteBook/{id}', [BookController::class, 'deleteBook']);
 });
 
