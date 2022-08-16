@@ -26,19 +26,19 @@ class AuthController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:100',
-                'last_name' => 'string|max:100',
+                'last_name' => 'string|max:100|nullable',
                 'nick_name' => 'required|string|max:100|unique:users',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:6',
-                'gender' => 'string|min:4|max:6',
-                'age' => 'integer|max:200',
-                'country' => 'string',
-                'favourite_author' => 'string',
-                'favourite_genre' => 'string',
-                'currently_reading' => 'string',
-                'facebook_account' => 'string',
-                'twitter_account' => 'string',
-                'instagram_account' => 'string'
+                'gender' => 'string|min:4|max:6|nullable',
+                'age' => 'integer|max:200|nullable',
+                'country' => 'string|nullable',
+                'favourite_author' => 'string|nullable',
+                'favourite_genre' => 'string|nullable',
+                'currently_reading' => 'string|nullable',
+                'facebook_account' => 'string|nullable',
+                'twitter_account' => 'string|nullable',
+                'instagram_account' => 'string|nullable'
             ]);
 
             if ($validator->fails()) {
