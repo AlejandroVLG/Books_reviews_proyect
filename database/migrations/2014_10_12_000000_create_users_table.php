@@ -17,19 +17,19 @@ return new class extends Migration
 
             $table->id();
             $table->string('name');
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('nick_name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('gender');
-            $table->integer('age');
-            $table->string('country');
-            $table->string('favourite_author');
-            $table->string('favourite_genre');
-            $table->string('currently_reading');
-            $table->string('facebook_account')->unique();
-            $table->string('twitter_account')->unique();
-            $table->string('instagram_account')->unique();
+            $table->string('gender')->nullable();
+            $table->integer('age')->nullable();
+            $table->string('country')->nullable();
+            $table->string('favourite_author')->nullable();
+            $table->string('favourite_genre')->nullable();
+            $table->string('currently_reading')->nullable();
+            $table->string('facebook_account')->unique()->nullable();
+            $table->string('twitter_account')->unique()->nullable();
+            $table->string('instagram_account')->unique()->nullable();
             $table->timestamps();
         });
     }
