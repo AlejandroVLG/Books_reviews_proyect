@@ -63,10 +63,10 @@ class AuthController extends Controller
             ]);
 
             $users = User::all();
-            
+
             // Por defecto se asigna al primer usuario creado los roles "Admin" y "Super_Admin", apartir de ahí
             // a todos los demás usarios se le asignará automáticamente el role de "User"
-            if (count($users) == 0) {
+            if (count($users) == 1) {
 
                 $user->roles()->attach(self::ROLE_ADMIN);
                 $user->roles()->attach(self::ROLE_SUPER_ADMIN);
