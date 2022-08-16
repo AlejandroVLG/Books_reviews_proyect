@@ -82,7 +82,7 @@ class userSeeder extends Seeder
                 'country' => 'Spain',
                 'favourite_author' => 'John Grisham',
                 'favourite_genre' => 'Thriller',
-                'currently_readying' => 'El ocho',
+                'currently_reading' => 'El ocho',
                 'facebook_account' => 'Paco@facebook.com',
                 'twitter_account' => 'Paco@twitter.com',
                 'instagram_account' => 'Paco@instagram.com'
@@ -100,7 +100,7 @@ class userSeeder extends Seeder
                 'country' => 'Spain',
                 'favourite_author' => 'J.R.R. Tolkien',
                 'favourite_genre' => 'Fantasy',
-                'currently_readying' => 'Elantris',
+                'currently_reading' => 'Elantris',
                 'facebook_account' => 'Sara@facebook.com',
                 'twitter_account' => 'Sara@twitter.com',
                 'instagram_account' => 'Sara@instagram.com'
