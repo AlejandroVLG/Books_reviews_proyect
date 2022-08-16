@@ -6,7 +6,7 @@ use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 
-class isAdmin
+class IsAdmin
 {   
     const ROLE_ADMIN = 2;
 
