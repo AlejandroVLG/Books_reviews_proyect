@@ -62,7 +62,7 @@ class AuthController extends Controller
                 'instagram_account' => $request->get('instagram_account'),
             ]);
 
-            /* $users = User::all();
+            $users = User::all();
             
             // Por defecto se asigna al primer usuario creado los roles "Admin" y "Super_Admin", apartir de ahí
             // a todos los demás usarios se le asignará automáticamente el role de "User"
@@ -72,11 +72,9 @@ class AuthController extends Controller
                 $user->roles()->attach(self::ROLE_SUPER_ADMIN);
             } else {
                 $user->roles()->attach(self::ROLE_USER);
-            } */
+            }
 
-            $token = JWTAuth::fromUser($user);
-
-            return response()->json(compact('user', 'token'), 201);
+            return response()->json(compact('user'), 201);
         } catch (\Exception $exception) {
 
             Log::error("Error registering new user: " . $exception->getMessage());
