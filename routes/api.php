@@ -14,10 +14,10 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 ///////////////// ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN //////////////////////
+Route::get('user/myProfile', [UserController::class, 'showMyProfile']);
 
 Route::group(["middleware" => "jwt.auth"], function () {
     
-    Route::get('user/myProfile', [UserController::class, 'showMyProfile']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::put('user/editMyProfile', [UserController::class, 'editMyProfile']);
     Route::delete('user/deleteMyProfile', [UserController::class, 'deleteMyProfile']);
