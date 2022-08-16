@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->string('synopsis');
+            $table->longText('synopsis');
             $table->string('series');
             $table->string('author');
             $table->string('genre');

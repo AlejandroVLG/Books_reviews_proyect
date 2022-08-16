@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('book_id');
             $table->string('review_title');
             $table->integer('score');
-            $table->string('message');
+            $table->longText('message');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
