@@ -12,6 +12,7 @@ Route::get('/', function () {return ['Bienvenido a mi api'];});
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('book/showAllBooks', [BookController::class, 'showAllBooks']);
 
 ///////////////// ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN //////////////////////
 
@@ -23,7 +24,6 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::delete('user/deleteMyProfile', [UserController::class, 'deleteMyProfile']);
 
     Route::post('book/createBook', [BookController::class, 'createBook']);
-    Route::get('book/showAllBooks', [BookController::class, 'showAllBooks']);
     Route::put('book/editBookById/{id}', [BookController::class, 'editBookById']);
     Route::get('book/searchBookByTitle/{title}', [BookController::class, 'searchBookByTitle']);
     Route::get('book/searchBooksByAuthor/{author}', [BookController::class, 'searchBookByAuthor']);
