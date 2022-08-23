@@ -84,15 +84,15 @@ class ReviewController extends Controller
             Log::info("Getting all reviews");
 
             $reviews = Review::query()
-                ->join('Users', 'Reviews.user_id', '=', 'Users.id',)
-                ->join('Books', 'Reviews.book_id', '=', 'Books.id')
+                ->join('users', 'reviews.user_id', '=', 'users.id',)
+                ->join('books', 'reviews.book_id', '=', 'books.id')
                 ->select(
-                    'Reviews.id',
-                    'Users.name',
-                    'Books.title',
-                    'Reviews.review_title',
-                    'Reviews.score',
-                    'Reviews.message'
+                    'reviews.id',
+                    'users.name',
+                    'books.title',
+                    'reviews.review_title',
+                    'reviews.score',
+                    'reviews.message'
                 )
                 ->get()
                 ->toArray();
@@ -256,15 +256,15 @@ class ReviewController extends Controller
             Log::info("Getting filtered reviews by user id");
 
             $review = Review::query()
-                ->join('Users', 'Reviews.user_id', '=', 'Users.id',)
-                ->join('Books', 'Reviews.book_id', '=', 'Books.id')
+                ->join('users', 'reviews.user_id', '=', 'users.id',)
+                ->join('books', 'reviews.book_id', '=', 'books.id')
                 ->select(
-                    'Reviews.id',
-                    'Users.name',
-                    'Books.title',
-                    'Reviews.review_title',
-                    'Reviews.score',
-                    'Reviews.message'
+                    'reviews.id',
+                    'users.name',
+                    'books.title',
+                    'reviews.review_title',
+                    'reviews.score',
+                    'reviews.message'
                 )
                 ->where('name', '=', $name)
                 ->get()
@@ -302,15 +302,15 @@ class ReviewController extends Controller
             Log::info("Getting all reviews ordered descendent");
 
             $reviews = Review::query()
-                ->join('Users', 'Reviews.user_id', '=', 'Users.id',)
-                ->join('Books', 'Reviews.book_id', '=', 'Books.id')
+                ->join('users', 'reviews.user_id', '=', 'users.id',)
+                ->join('books', 'reviews.book_id', '=', 'books.id')
                 ->select(
-                    'Reviews.id',
-                    'Users.name',
-                    'Books.title',
-                    'Reviews.review_title',
-                    'Reviews.score',
-                    'Reviews.message'
+                    'reviews.id',
+                    'users.name',
+                    'books.title',
+                    'reviews.review_title',
+                    'reviews.score',
+                    'reviews.message'
                 )
                 ->orderBy('score', 'desc')
                 ->get()
@@ -348,15 +348,15 @@ class ReviewController extends Controller
             Log::info("Getting all reviews ordered ascendent");
 
             $reviews = Review::query()
-                ->join('Users', 'Reviews.user_id', '=', 'Users.id',)
-                ->join('Books', 'Reviews.book_id', '=', 'Books.id')
+                ->join('users', 'reviews.user_id', '=', 'users.id',)
+                ->join('books', 'reviews.book_id', '=', 'books.id')
                 ->select(
-                    'Reviews.id',
-                    'Users.name',
-                    'Books.title',
-                    'Reviews.review_title',
-                    'Reviews.score',
-                    'Reviews.message'
+                    'reviews.id',
+                    'users.name',
+                    'books.title',
+                    'reviews.review_title',
+                    'reviews.score',
+                    'reviews.message'
                 )
                 ->orderBy('score', 'asc')
                 ->get()

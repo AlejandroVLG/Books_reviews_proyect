@@ -298,19 +298,19 @@ class BookController extends Controller
             Log::info("Getting filtered books by title");
 
             $book = Book::query()
-                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->join('users', 'books.user_id', '=', 'users.id')
                 ->select(
-                    'Books.id',
-                    'Users.name',
-                    'Books.title',
-                    'Books.synopsis',
-                    'Books.series',
-                    'Books.author',
-                    'Books.genre',
-                    'Books.year',
-                    'Books.book_cover',
-                    'Books.author_wiki_url',
-                    'Books.shop_url'
+                    'books.id',
+                    'users.name',
+                    'books.title',
+                    'books.synopsis',
+                    'books.series',
+                    'books.author',
+                    'books.genre',
+                    'books.year',
+                    'books.book_cover',
+                    'books.author_wiki_url',
+                    'books.shop_url'
                 )
                 ->where('title', '=', $title)
                 ->get()
@@ -349,19 +349,19 @@ class BookController extends Controller
             Log::info("Getting filtered books by author");
 
             $book = Book::query()
-                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->join('users', 'books.user_id', '=', 'users.id')
                 ->select(
-                    'Books.id',
-                    'Users.name',
-                    'Books.title',
-                    'Books.synopsis',
-                    'Books.series',
-                    'Books.author',
-                    'Books.genre',
-                    'Books.year',
-                    'Books.book_cover',
-                    'Books.author_wiki_url',
-                    'Books.shop_url'
+                    'books.id',
+                    'users.name',
+                    'books.title',
+                    'books.synopsis',
+                    'books.series',
+                    'books.author',
+                    'books.genre',
+                    'books.year',
+                    'books.book_cover',
+                    'books.author_wiki_url',
+                    'books.shop_url'
                 )
                 ->where('author', '=', $author)
                 ->orderBy('title', 'asc')
@@ -401,19 +401,19 @@ class BookController extends Controller
             Log::info("Getting filtered books by series");
 
             $book = Book::query()
-                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->join('users', 'books.user_id', '=', 'users.id')
                 ->select(
-                    'Books.id',
-                    'Users.name',
-                    'Books.title',
-                    'Books.synopsis',
-                    'Books.series',
-                    'Books.author',
-                    'Books.genre',
-                    'Books.year',
-                    'Books.book_cover',
-                    'Books.author_wiki_url',
-                    'Books.shop_url'
+                    'books.id',
+                    'users.name',
+                    'books.title',
+                    'books.synopsis',
+                    'books.series',
+                    'books.author',
+                    'books.genre',
+                    'books.year',
+                    'books.book_cover',
+                    'books.author_wiki_url',
+                    'books.shop_url'
                 )
                 ->where('series', '=', $series)
                 ->orderBy('title', 'asc')
@@ -453,19 +453,19 @@ class BookController extends Controller
             Log::info("Getting filtered books by genre");
 
             $book = Book::query()
-                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->join('users', 'books.user_id', '=', 'users.id')
                 ->select(
-                    'Books.id',
-                    'Users.name',
-                    'Books.title',
-                    'Books.synopsis',
-                    'Books.series',
-                    'Books.author',
-                    'Books.genre',
-                    'Books.year',
-                    'Books.book_cover',
-                    'Books.author_wiki_url',
-                    'Books.shop_url'
+                    'books.id',
+                    'users.name',
+                    'books.title',
+                    'books.synopsis',
+                    'books.series',
+                    'books.author',
+                    'books.genre',
+                    'books.year',
+                    'books.book_cover',
+                    'books.author_wiki_url',
+                    'books.shop_url'
                 )
                 ->where('genre', '=', $genre)
                 ->orderBy('author', 'asc')
@@ -505,19 +505,19 @@ class BookController extends Controller
             Log::info("Getting filtered books by year");
 
             $book = Book::query()
-                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->join('users', 'books.user_id', '=', 'users.id')
                 ->select(
-                    'Books.id',
-                    'Users.name',
-                    'Books.title',
-                    'Books.synopsis',
-                    'Books.series',
-                    'Books.author',
-                    'Books.genre',
-                    'Books.year',
-                    'Books.book_cover',
-                    'Books.author_wiki_url',
-                    'Books.shop_url'
+                    'books.id',
+                    'users.name',
+                    'books.title',
+                    'books.synopsis',
+                    'books.series',
+                    'books.author',
+                    'books.genre',
+                    'books.year',
+                    'books.book_cover',
+                    'books.author_wiki_url',
+                    'books.shop_url'
                 )
                 ->where('year', '=', $year)
                 ->orderBy('title', 'asc')
