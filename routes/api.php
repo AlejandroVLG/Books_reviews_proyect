@@ -8,20 +8,28 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {return ['Bienvenido a mi api'];});
+
+///////////////// ENDPOINTS QUE NO REQUIEREN AUTENTIFICACIÓN //////////////////////
+
+Route::get('/', function () { return ['Bienvenido a mi api de libros']; });
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('book/showAllBooks', [BookController::class, 'showAllBooks']);
 
-///////////////// ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN //////////////////////
+///////////////// USER ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN //////////////////////
 
 Route::group(["middleware" => "jwt.auth"], function () {
-    
+
     Route::get('user/myProfile', [UserController::class, 'showMyProfile']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::put('user/editMyProfile', [UserController::class, 'editMyProfile']);
     Route::delete('user/deleteMyProfile', [UserController::class, 'deleteMyProfile']);
+});
+
+///////////////// BOOKS ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN //////////////////////
+
+Route::group(["middleware" => "jwt.auth"], function () {
 
     Route::post('book/createBook', [BookController::class, 'createBook']);
     Route::put('book/editBookById/{id}', [BookController::class, 'editBookById']);
@@ -30,6 +38,11 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::get('book/searchBooksBySeries/{series}', [BookController::class, 'searchBookBySeries']);
     Route::get('book/searchBooksByGenre/{genre}', [BookController::class, 'searchBooksByGenre']);
     Route::get('book/searchBookByYear/{year}', [BookController::class, 'searchBookByYear']);
+});
+
+///////////////// REVIEWS ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN //////////////////////
+
+Route::group(["middleware" => "jwt.auth"], function () {
 
     Route::post('review/createReview', [ReviewController::class, 'createReview']);
     Route::get('review/showAllReviews', [ReviewController::class, 'showAllReviews']);
@@ -43,7 +56,7 @@ Route::group(["middleware" => "jwt.auth"], function () {
 //////////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "IsAdmin" ///////////////////////
 
 Route::group(["Middleware" => ["jwt.auth", "IsAdmin"]], function () {
-    
+
     Route::get('/user/getAllUsers', [UserController::class, 'getUsers']);
     Route::delete('book/deleteBook/{id}', [BookController::class, 'deleteBook']);
 });
