@@ -97,19 +97,19 @@ class BookController extends Controller
             Log::info("Getting all books");
 
             $books = Book::query()
-                ->join('users', 'Books.user_id', '=', 'Users.id')
+                ->join('users', 'books.user_id', '=', 'users.id')
                 ->select(
-                    'Books.id',
-                    'Users.name',
-                    'Books.title',
-                    'Books.synopsis',
-                    'Books.series',
-                    'Books.author',
-                    'Books.genre',
-                    'Books.year',
-                    'Books.book_cover',
-                    'Books.author_wiki_url',
-                    'Books.shop_url'
+                    'books.id',
+                    'users.name',
+                    'books.title',
+                    'books.synopsis',
+                    'books.series',
+                    'books.author',
+                    'books.genre',
+                    'books.year',
+                    'books.book_cover',
+                    'books.author_wiki_url',
+                    'books.shop_url'
                 )
                 ->orderBy('title', 'asc')
                 ->get()
