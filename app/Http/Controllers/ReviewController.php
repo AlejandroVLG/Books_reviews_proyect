@@ -67,7 +67,7 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error creating the review " . $reviewTitle
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -112,7 +112,7 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting the reviews"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -194,7 +194,7 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error modifing the reviewv " . $id
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -238,7 +238,7 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error deleting the review"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -285,7 +285,7 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting the reviews"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -331,7 +331,7 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting the reviews"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -377,7 +377,7 @@ class ReviewController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting the reviews"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );

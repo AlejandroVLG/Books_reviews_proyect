@@ -30,7 +30,7 @@ class UserController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error showing my profile"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -65,7 +65,7 @@ class UserController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error retrieveing users"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -192,7 +192,7 @@ class UserController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error modifing User data"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -238,7 +238,7 @@ class UserController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error deleting profile"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -271,7 +271,7 @@ class UserController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error adding Admin role"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -304,7 +304,7 @@ class UserController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Admin role removed"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );

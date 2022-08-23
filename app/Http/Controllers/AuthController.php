@@ -89,7 +89,7 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'Error registering new user'
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -132,7 +132,7 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'Error login user'
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -159,10 +159,12 @@ class AuthController extends Controller
             );
         } catch (\Exception $exception) {
 
+            Log::error("Error login out: " . $exception->getMessage());
+
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'Sorry, the user cannot be logged out'
+                    'message' => $exception->getMessage()
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );

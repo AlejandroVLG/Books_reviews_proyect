@@ -55,7 +55,7 @@ class RoleController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'Error creating role'
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -99,7 +99,7 @@ class RoleController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error deleting role"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );

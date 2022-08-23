@@ -80,7 +80,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error creating the book " . $title
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -236,7 +236,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error modifing the book " . $id
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -280,7 +280,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error deleting the book"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -331,7 +331,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting books"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -383,7 +383,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting books"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -435,7 +435,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting books"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -487,7 +487,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting books"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
@@ -539,7 +539,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting books"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
