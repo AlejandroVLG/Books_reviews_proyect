@@ -130,7 +130,7 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => "Error getting books"
+                    'message' => $exception->getMessage()
                 ],
                 500
             );
