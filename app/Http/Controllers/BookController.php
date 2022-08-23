@@ -97,7 +97,7 @@ class BookController extends Controller
             Log::info("Getting all books");
 
             $books = Book::query()
-                ->join('Users', 'Books.user_id', '=', 'Users.id')
+                ->join('users', 'Books.user_id', '=', 'Users.id')
                 ->select(
                     'Books.id',
                     'Users.name',
