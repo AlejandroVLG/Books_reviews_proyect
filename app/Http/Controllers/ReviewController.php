@@ -90,9 +90,11 @@ class ReviewController extends Controller
                     'reviews.id',
                     'users.name',
                     'books.title',
+                    'books.synopsis',
                     'reviews.review_title',
                     'reviews.score',
-                    'reviews.message'
+                    'reviews.message',
+                    'books.book_cover'
                 )
                 ->get()
                 ->toArray();
@@ -266,6 +268,7 @@ class ReviewController extends Controller
                     'reviews.id',
                     'users.name',
                     'books.title',
+                    'books.synopsis',
                     'reviews.review_title',
                     'reviews.score',
                     'reviews.message',
@@ -313,6 +316,7 @@ class ReviewController extends Controller
                     'reviews.id',
                     'users.name',
                     'books.title',
+                    'books.synopsis',
                     'reviews.review_title',
                     'reviews.score',
                     'reviews.message',
@@ -360,6 +364,7 @@ class ReviewController extends Controller
                     'reviews.id',
                     'users.name',
                     'books.title',
+                    'books.synopsis',
                     'reviews.review_title',
                     'reviews.score',
                     'reviews.message',
@@ -407,6 +412,7 @@ class ReviewController extends Controller
                     'reviews.id',
                     'users.name',
                     'books.title',
+                    'books.synopsis',
                     'reviews.review_title',
                     'reviews.score',
                     'reviews.message',
