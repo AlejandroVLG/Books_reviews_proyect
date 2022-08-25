@@ -208,9 +208,11 @@ class UserController extends Controller
         try {
             Log::info('Deleting User profile');
 
-            $user_id = auth()->user()->id;
+            $userId = auth()->user()->id;
 
-            $user = User::query()->find($user_id);
+            $user = User::query()
+            ->where('user_id', '=', $userId)
+            ->find($userId);
 
             if (!$user) {
                 return response()->json(
@@ -227,7 +229,7 @@ class UserController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => "User " . $user_id . " profile deleted"
+                    'message' => "User " . $userId . " profile deleted"
                 ],
                 200
             );

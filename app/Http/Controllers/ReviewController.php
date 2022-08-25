@@ -210,7 +210,11 @@ class ReviewController extends Controller
         try {
             Log::info('Deleting a review');
 
-            $review = Review::query()->find($id);
+            $userId = auth()->user()->id;
+
+            $review = Review::query()
+            ->where("user_id", "=", $userId)
+            ->find($id);
 
             if (!$review) {
                 return response()->json(
@@ -246,7 +250,7 @@ class ReviewController extends Controller
     }
 
     /////////////////////////////////////////////////////////////////////////////////
-    ///////<------------------- SEARCH REVIEW BY USER ID ------------------>/////////
+    ///////<---------------- SEARCH BOOK REVIEW BY USER ID ---------------->/////////
     /////////////////////////////////////////////////////////////////////////////////
 
     public function searchReviewByUserName($name)

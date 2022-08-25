@@ -252,7 +252,11 @@ class BookController extends Controller
         try {
             Log::info('Deleting book');
 
-            $book = Book::query()->find($id);
+            $userId = auth()->user()->id;
+
+            $book = Book::query()
+            ->where('user_id', '=', $userId)
+            ->find($id);
 
             if (!$book) {
                 return response()->json(
