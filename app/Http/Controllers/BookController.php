@@ -262,7 +262,7 @@ class BookController extends Controller
                 return response()->json(
                     [
                         'success' => false,
-                        'message' => "Book doesn't exists"
+                        'message' => "You can't delete this book"
                     ],
                     404
                 );

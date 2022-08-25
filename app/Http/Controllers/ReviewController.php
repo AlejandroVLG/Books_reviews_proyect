@@ -220,7 +220,7 @@ class ReviewController extends Controller
                 return response()->json(
                     [
                         'success' => false,
-                        'message' => "Review doesn't exists"
+                        'message' => "You can't delete this review"
                     ],
                     404
                 );
@@ -250,14 +250,14 @@ class ReviewController extends Controller
     }
 
     /////////////////////////////////////////////////////////////////////////////////
-    ///////<---------------- SEARCH BOOK REVIEW BY USER ID ---------------->/////////
+    //////////<---------------- SEARCH REVIEW BY USER ID ---------------->///////////
     /////////////////////////////////////////////////////////////////////////////////
 
     public function searchReviewByUserName($name)
     {
         try {
 
-            Log::info("Getting filtered reviews by user id");
+            Log::info("Getting filtered reviews by user name");
 
             $review = Review::query()
                 ->join('users', 'reviews.user_id', '=', 'users.id',)
@@ -371,6 +371,52 @@ class ReviewController extends Controller
                     'success' => true,
                     'message' => 'Reviews retrieved successfully',
                     'data' => $reviews
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting the reviews: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage()
+                ],
+                500
+            );
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////////
+    //////////<---------------- SEARCH REVIEW BY BOOK ID ---------------->///////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function searchReviewByBookTitle($title)
+    {
+        try {
+
+            Log::info("Getting filtered reviews by book title");
+
+            $review = Review::query()
+                ->join('users', 'reviews.user_id', '=', 'users.id',)
+                ->join('books', 'reviews.book_id', '=', 'books.id')
+                ->select(
+                    'reviews.id',
+                    'users.name',
+                    'books.title',
+                    'reviews.review_title',
+                    'reviews.score',
+                    'reviews.message'
+                )
+                ->where('title', '=', $title)
+                ->get()
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Reviews retrieved successfully',
+                    'data' => $review
                 ],
                 200
             );
