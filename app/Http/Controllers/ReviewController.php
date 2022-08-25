@@ -268,7 +268,8 @@ class ReviewController extends Controller
                     'books.title',
                     'reviews.review_title',
                     'reviews.score',
-                    'reviews.message'
+                    'reviews.message',
+                    'books.book_cover'
                 )
                 ->where('name', '=', $name)
                 ->get()
@@ -314,7 +315,8 @@ class ReviewController extends Controller
                     'books.title',
                     'reviews.review_title',
                     'reviews.score',
-                    'reviews.message'
+                    'reviews.message',
+                    'books.book_cover'
                 )
                 ->orderBy('score', 'desc')
                 ->get()
@@ -360,7 +362,8 @@ class ReviewController extends Controller
                     'books.title',
                     'reviews.review_title',
                     'reviews.score',
-                    'reviews.message'
+                    'reviews.message',
+                    'books.book_cover'
                 )
                 ->orderBy('score', 'asc')
                 ->get()
@@ -406,7 +409,8 @@ class ReviewController extends Controller
                     'books.title',
                     'reviews.review_title',
                     'reviews.score',
-                    'reviews.message'
+                    'reviews.message',
+                    'books.book_cover'
                 )
                 ->where('title', '=', $title)
                 ->get()
