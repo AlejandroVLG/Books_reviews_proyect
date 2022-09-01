@@ -408,6 +408,7 @@ class ReviewController extends Controller
                 ->join('books', 'reviews.book_id', '=', 'books.id')
                 ->select(
                     'reviews.id',
+                    'reviews.book_id',
                     'users.name',
                     'books.title',
                     'books.synopsis',
@@ -416,7 +417,7 @@ class ReviewController extends Controller
                     'reviews.message',
                     'books.book_cover'
                 )
-                ->where('id', '=', $id)
+                ->where('book_id', '=', $id)
                 ->get()
                 ->toArray();
 
