@@ -258,7 +258,6 @@ class ReviewController extends Controller
     public function searchReviewByUserName($name)
     {
         try {
-
             Log::info("Getting filtered reviews by user name");
 
             $review = Review::query()
@@ -399,10 +398,9 @@ class ReviewController extends Controller
     //////////<---------------- SEARCH REVIEW BY BOOK ID ---------------->///////////
     /////////////////////////////////////////////////////////////////////////////////
 
-    public function searchReviewByBookTitle($title)
+    public function searchReviewByBookId($id)
     {
         try {
-
             Log::info("Getting filtered reviews by book title");
 
             $review = Review::query()
@@ -418,7 +416,7 @@ class ReviewController extends Controller
                     'reviews.message',
                     'books.book_cover'
                 )
-                ->where('title', '=', $title)
+                ->where('id', '=', $id)
                 ->get()
                 ->toArray();
 

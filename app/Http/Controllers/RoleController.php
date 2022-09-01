@@ -15,7 +15,6 @@ class RoleController extends Controller
 
     public function newRole(Request $request)
     {
-
         try {
             Log::info('Creating role');
 

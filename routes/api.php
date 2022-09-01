@@ -51,7 +51,7 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::get('review/searchReviewByUserName/{name}', [ReviewController::class, 'searchReviewByUserName']);
     Route::get('review/showReviewsOrderedByScoreDesc', [ReviewController::class, 'showReviewsOrderedByScoreDesc']);
     Route::get('review/showReviewsOrderedByScoreAsc', [ReviewController::class, 'showReviewsOrderedByScoreAsc']);
-    Route::get('review/searchReviewByBookTitle/{title}', [ReviewController::class, 'searchReviewByBookTitle']);
+    Route::get('review/searchReviewByBookTitle/{id}', [ReviewController::class, 'searchReviewByBookTitle']);
 });
 
 //////////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "IsAdmin" ///////////////////////

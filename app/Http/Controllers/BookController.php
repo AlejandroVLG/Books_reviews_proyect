@@ -298,7 +298,6 @@ class BookController extends Controller
     public function searchBookByTitle($title)
     {
         try {
-
             Log::info("Getting filtered books by title");
 
             $book = Book::query()
@@ -349,7 +348,6 @@ class BookController extends Controller
     public function searchBooksByAuthor($author)
     {
         try {
-
             Log::info("Getting filtered books by author");
 
             $book = Book::query()
@@ -401,7 +399,6 @@ class BookController extends Controller
     public function searchBooksBySeries($series)
     {
         try {
-
             Log::info("Getting filtered books by series");
 
             $book = Book::query()
@@ -453,7 +450,6 @@ class BookController extends Controller
     public function searchBooksByGenre($genre)
     {
         try {
-
             Log::info("Getting filtered books by genre");
 
             $book = Book::query()
@@ -505,7 +501,6 @@ class BookController extends Controller
     public function searchBookByYear($year)
     {
         try {
-
             Log::info("Getting filtered books by year");
 
             $book = Book::query()

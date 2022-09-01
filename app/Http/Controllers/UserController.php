@@ -23,6 +23,7 @@ class UserController extends Controller
             Log::info('Showing my profile');
 
             return response()->json(auth()->user(), 200);;
+
         } catch (Exception $exception) {
 
             Log::error("Error showing my profile" . $exception->getMessage());
@@ -44,7 +45,6 @@ class UserController extends Controller
     public function getUsers()
     {
         try {
-
             Log::info('Retrieving all users');
 
             $users = User::orderBy('name', 'asc')
@@ -211,8 +211,8 @@ class UserController extends Controller
             $userId = auth()->user()->id;
 
             $user = User::query()
-            ->where('user_id', '=', $userId)
-            ->find($userId);
+                ->where('user_id', '=', $userId)
+                ->find($userId);
 
             if (!$user) {
                 return response()->json(
@@ -254,7 +254,6 @@ class UserController extends Controller
     public function addAdminRoleToUser($id)
     {
         try {
-
             $user = User::find($id);
 
             $user->roles()->attach(self::ROLE_ADMIN);
@@ -287,7 +286,6 @@ class UserController extends Controller
     public function removeAdminRoleToUser($id)
     {
         try {
-
             $user = User::find($id);
 
             $user->roles()->detach(self::ROLE_ADMIN);
