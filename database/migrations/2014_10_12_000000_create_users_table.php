@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('facebook_account')->unique()->nullable();
             $table->string('twitter_account')->unique()->nullable();
             $table->string('instagram_account')->unique()->nullable();
+            $table->string('profile_img')->nullable();
             $table->timestamps();
         });
     }

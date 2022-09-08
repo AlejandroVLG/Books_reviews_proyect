@@ -99,7 +99,8 @@ class UserController extends Controller
                 'currently_reading' => 'string',
                 'facebook_account' => 'string',
                 'twitter_account' => 'string',
-                'instagram_account' => 'string'
+                'instagram_account' => 'string',
+                'profile_img' => 'url'
             ]);
 
             if ($validator->fails()) {
@@ -135,6 +136,7 @@ class UserController extends Controller
             $facebookAccount = $request->input('facebook_account');
             $twitterAccount = $request->input('twitter_account');
             $instagramAccount = $request->input('instagram_account');
+            $profileImg = $request->input('profile_img');
 
             if (isset($name)) {
                 $user->name = $name;
@@ -174,6 +176,9 @@ class UserController extends Controller
             };
             if (isset($instagramAccount)) {
                 $user->instagram_account = $instagramAccount;
+            };
+            if (isset($profileImg)) {
+                $user->profile_img = $profileImg;
             };
 
             $user->save();
