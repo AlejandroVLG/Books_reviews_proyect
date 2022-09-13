@@ -1,64 +1,151 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<img src="/public/img/geeks.png" style="width:900px;"/>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+# <center>Base de datos sobre reseñas de libros </center>
+Esta es la base de datos de mi proyecto final utilizando Laravel realizado en el curso de FullStack Developer de GeeksHubs academy con deploy realizado en: <br>
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
+He creado una base de datos que unida a un fronted (al final añadiré el enlace) realizado en react/redux sirve como web de reseñas literarias. La base de datos consta de 4 tablas, users, books, reviews, roles, más una tabla intermedia por la relación muchos a muchos entre users y roles. 
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> Para la creación esta base de datos se han utilizando las siguientes tecnologías:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)  ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<center>![Diagrama](https://user-images.githubusercontent.com/102535865/189875041-9185cd1f-582c-40c3-8f44-8f206296a98c.png)</center>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+>*  La base de datos sigue el esquema <b>MVC (Model-View-Controller).</b> 
 
-### Premium Partners
+>* Las contraseñas son encriptadas a través de <b>BCRYPTJS</b> y la base de datos usa el sistema <b>JSON Web Token</b>.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+>* La base de datos incluye un CRUD completo de las tablas <b>USERS</b>, <b>GAMES</b>, <b>CHANNELS</b> and <b>MESSAGES</b> .</b>
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Listado de enpoints:
 
-## Code of Conduct
+###### <center><span style="color:red"> USER</span></center> 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/register</b>
 
-## Security Vulnerabilities
+>Crea un <b>nuevo usuario.</b> Al crear un nuevo usuario por defecto se crea el rol de user en la tabla intermedia <b>role_user</b>, con la excepción del primer usuario que se registra en la web, al que automáticamente se le asignan los roles de admin y super admin.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/login</b>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+>Al iniciar sesión con cualquier usuario se crea un token único vinculado a ese usuario.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/logout</b>
 
-## License
+>Al cerrar sesión se inhabilita el token vinculado al usuario.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/user/myProfile</b>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+>Muestra los datos de perfil del usuario, se accede a través del token al perfil asociado a dicho token, de esta forma cada usuario únicamente puede ver su perfil.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/user/editMyProfile/{id}</b>
+
+>Permite modificar uno o varios campos de nuestro perfil, accediendo a través de nuestro token y el ID de usuario asociado a dicho token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/user/getAllUsers</b>
+
+>Permite a un usuario con privilegios de Admin ver todos los usuarios registrados.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/user/deleteUserById</b>
+
+>Permite a un usuario borrar su perfil.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/user/newAdmin/{id}</b>
+
+>Asigna el rol de admin al usuario indicado por id, requiere rol de super admin.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/user/adminRemove/{id}</b>
+
+>Retira el rol de admin al usuario indicado por id, requiere rol de super admin.
+---
+
+###### <center><span style="color:red"> BOOKS</span></center> 
+
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/book/createBook</b>
+
+>Da de alta en la base de datos un nuevo libro, requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/book/showAllBooks</b>
+
+>Muestra todos los libros ordenados por título ascendente, no requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/book/searchBookByTitle/{title}</b>
+
+>Muestra únicamente los libros que coincidan con el título que haya introducido un usuario específico, requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/book/searchBookByAuthor/{author}</b>
+
+>Muestra únicamente los libros que coincidan con el autor que haya introducido un usuario específico, requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/book/searchBookBySeries/{series}</b>
+
+>Muestra únicamente los libros que coincidan con la saga que haya introducido un usuario específico, requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/book/searchBookByYear/{year}</b>
+
+>Muestra únicamente los libros que coincidan con la fecha de publicación que haya introducido un usuario específico, requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/book/editBookById/{id}</b>
+
+>Indicando el <b>ID</b> del libro en la <b>URL</b> del endpoint, permite editar datos del libro al usuario que lo haya introducido,requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/book/deleteBook/{id}</b>
+
+>Indicando el <b>ID</b> del libro en la <b>URL</b> del endpoint, permite borrar el libro únicamente a su creador,requiere token.
+---
+
+###### <center><span style="color:red"> ROLES</span></center> 
+
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/role/newRole</b>
+
+>Crea un nuevo rol, únicamente puede hacerlo un super admin.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/role/deleteRole/{id}</b>
+
+>Elimina un rol existente especificando su id, únicamente puede hacerlo un super admin.
+---
+
+###### <center><span style="color:red"> REVIEWS</span></center>
+
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/review/createReview</b>
+
+> El usuario puede crear una reseña sobre el libro indicado, requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/review/showAllReviews</b>
+
+> Muestra todas las reseñas existentes de todos los títulos, requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/review/searchReviewByUserName/{user_name}</b>
+
+>Muestra todas las reseñas filtradas asociadas al nombre del usuario que le indiquemos, requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/review/searchReviewByBookId/{id}</b>
+
+>Muestra todas las reseñas asociadas al id del libro que le indiquemos, requiere token.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/review/editReviewById/{id}</b>
+
+>Permite modificar uno o varios campos al usuario que ha creado la reseña indicada por su id.
+---
+- <b>https://books-reviews-app-proyect.herokuapp.com/api/review/deleteReview/{id}</b>
+
+>Permite eliminar la reseña que le indiquemos con su id al usuario que la ha creado.
+---
+
+## 🌐 Socials:
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alejandrolaguia/) 
+
+## Frontend asociado a esta base de datos
+
+https://github.com/Alexdck/Books_reviews_proyect_react/tree/develop
