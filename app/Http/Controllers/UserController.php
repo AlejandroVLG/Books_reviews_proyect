@@ -81,10 +81,6 @@ class UserController extends Controller
         try {
             Log::info('Updating User');
 
-            $userId = auth()->user()->id;
-
-            $user = User::query()->find($userId);
-
             $validator = Validator::make($request->all(), [
                 'name' => 'string|max:100',
                 'last_name' => 'string|max:100',
@@ -112,6 +108,10 @@ class UserController extends Controller
                     400
                 );
             }
+
+            $userId = auth()->user()->id;
+
+            $user = User::query()->find($userId);
 
             if (!$user) {
                 return response()->json(
