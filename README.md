@@ -7,7 +7,7 @@ Base de datos realizada en Laravel como proyecto final en el curso de FullStack 
 ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
 ---
-He creado una base de datos que unida a un fronted realizado en react/redux (al final añadiré el enlace), sirve como web de reseñas literarias. La base de datos consta de 4 tablas relacionales, users, books, reviews, roles, además de una tabla intermedia dada la relación muchos a muchos entre users y roles. 
+He creado una base de datos que unida a un front-end realizado en react (al final añadiré el enlace), sirve como web de reseñas literarias. La base de datos consta de 4 tablas relacionales, users, books, reviews, roles, además de una tabla intermedia dada la relación muchos a muchos entre users y roles. 
 ---
 
 > Para la creación esta base de datos se han utilizando las siguientes tecnologías:
