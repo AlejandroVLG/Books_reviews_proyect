@@ -7,10 +7,10 @@ Base de datos realizada en Laravel como proyecto final en el curso de FullStack 
 ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
 ---
-He creado una base de datos que unida a un fronted realizado en react/redux (al final añadiré el enlace), sirve como web de reseñas literarias. La base de datos consta de 4 tablas relacionales, users, books, reviews, roles, además de una tabla intermedia dada la relación muchos a muchos entre users y roles. 
+He creado una base de datos que unida a un front-end realizado en react (al final añadiré el enlace), sirve como web de reseñas literarias. La base de datos consta de 4 tablas relacionales, users, books, reviews, roles, además de una tabla intermedia dada la relación muchos a muchos entre users y roles. 
 ---
 
-> Para la creación esta base de datos se han utilizando las siguientes tecnologías:
+> Para la creación de esta base de datos se han utilizando las siguientes tecnologías:
 
 ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)  ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
