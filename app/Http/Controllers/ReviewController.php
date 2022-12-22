@@ -170,7 +170,7 @@ class ReviewController extends Controller
             if (isset($bookId)) {
                 $review->book_id = $bookId;
             };
-            if (isset($synopsis)) {
+            if (isset($reviewTitle)) {
                 $review->review_title = $reviewTitle;
             };
             if (isset($score)) {
