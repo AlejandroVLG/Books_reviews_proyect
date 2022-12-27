@@ -146,20 +146,6 @@ class BookController extends Controller
             Log::info("Getting a book by ID");
 
             $book = Book::query()
-                ->join('users', 'books.user_id', '=', 'users.id')
-                ->select(
-                    'books.id',
-                    'users.name',
-                    'books.title',
-                    'books.synopsis',
-                    'books.series',
-                    'books.author',
-                    'books.genre',
-                    'books.year',
-                    'books.book_cover',
-                    'books.author_wiki_url',
-                    'books.shop_url'
-                )
                 ->where('id', '=', $id)
                 ->get()
                 ->toArray();
