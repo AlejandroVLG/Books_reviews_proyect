@@ -72,6 +72,42 @@ class UserController extends Controller
         }
     }
 
+    
+    /////////////////////////////////////////////////////////////////////////////////
+    ////////////<------------------- SHOW USER BY ID ------------------>//////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function showUserById($id)
+    {
+        try {
+            Log::info("Getting a user by ID");
+
+            $user = User::query()
+                ->find($id)
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'user retrieved successfully',
+                    'data' => $user
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting the user: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage()
+                ],
+                500
+            );
+        }
+    }
+
     /////////////////////////////////////////////////////////////////////////////////
     ///////////<------------------- EDIT MY PROFILE ------------------>//////////////
     /////////////////////////////////////////////////////////////////////////////////

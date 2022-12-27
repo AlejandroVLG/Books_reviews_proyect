@@ -152,14 +152,14 @@ class BookController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'books retrieved successfully',
+                    'message' => 'book retrieved successfully',
                     'data' => $book
                 ],
                 200
             );
         } catch (\Exception $exception) {
 
-            Log::error("Error getting books: " . $exception->getMessage());
+            Log::error("Error getting the book: " . $exception->getMessage());
 
             return response()->json(
                 [

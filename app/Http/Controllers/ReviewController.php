@@ -122,6 +122,41 @@ class ReviewController extends Controller
     }
 
     /////////////////////////////////////////////////////////////////////////////////
+    ////////////<------------------- SHOW REVIEW BY ID ------------------>//////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public function showReviewById($id)
+    {
+        try {
+            Log::info("Getting a review by ID");
+
+            $review = Review::query()
+                ->find($id)
+                ->toArray();
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'review retrieved successfully',
+                    'data' => $review
+                ],
+                200
+            );
+        } catch (\Exception $exception) {
+
+            Log::error("Error getting the review: " . $exception->getMessage());
+
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => $exception->getMessage()
+                ],
+                500
+            );
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
     //////////<------------------- EDIT REVIEW BY ID------------------>//////////////
     /////////////////////////////////////////////////////////////////////////////////
 

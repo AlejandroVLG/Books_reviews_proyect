@@ -23,6 +23,7 @@ Route::get('book/showBookById/{id}', [BookController::class, 'showBookById']);
 Route::group(["middleware" => "jwt.auth"], function () {
 
     Route::get('user/myProfile', [UserController::class, 'showMyProfile']);
+    Route::get('user/showUserById', [UserController::class, 'showUserById']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::put('user/editMyProfile', [UserController::class, 'editMyProfile']);
     Route::delete('user/deleteMyProfile', [UserController::class, 'deleteMyProfile']);
@@ -47,6 +48,7 @@ Route::group(["middleware" => "jwt.auth"], function () {
 
     Route::post('review/createReview', [ReviewController::class, 'createReview']);
     Route::get('review/showAllReviews', [ReviewController::class, 'showAllReviews']);
+    Route::get('review/showReviewById', [ReviewController::class, 'showReviewById']);
     Route::put('review/editReviewById/{id}', [ReviewController::class, 'editReviewById']);
     Route::delete('review/deleteReview/{id}', [ReviewController::class, 'deleteReview']);
     Route::get('review/searchReviewByUserName/{name}', [ReviewController::class, 'searchReviewByUserName']);
