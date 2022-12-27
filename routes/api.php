@@ -16,6 +16,7 @@ Route::get('/', function () { return ['Bienvenido a mi api de libros']; });
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('book/showAllBooks', [BookController::class, 'showAllBooks']);
+Route::get('book/showBookById/{id}', [BookController::class, 'showBookById']);
 
 ///////////////// USER ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN //////////////////////
 
