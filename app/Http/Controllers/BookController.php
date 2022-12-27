@@ -181,7 +181,7 @@ class BookController extends Controller
             Log::info('Updating Book');
 
             $validator = Validator::make($request->all(), [
-                'title' => ['string', 'unique:books'],
+                'title' => 'string',
                 'synopsis' => 'string',
                 'series' => 'string',
                 'author' => 'string',
