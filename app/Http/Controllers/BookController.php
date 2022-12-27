@@ -146,8 +146,7 @@ class BookController extends Controller
             Log::info("Getting a book by ID");
 
             $book = Book::query()
-                ->where('id', '=', $id)
-                ->get()
+                ->find($id)
                 ->toArray();
 
             return response()->json(
@@ -288,10 +287,10 @@ class BookController extends Controller
             Log::info('Deleting book');
 
             $userId = auth()->user()->id;
-            
+
             $book = Book::query()
-            ->where('user_id', '=', $userId)
-            ->find($id);
+                ->where('user_id', '=', $userId)
+                ->find($id);
 
             if (!$book) {
                 return response()->json(
