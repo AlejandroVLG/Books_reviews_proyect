@@ -168,6 +168,7 @@ class UserController extends Controller
             $age = $request->input('age');
             $country = $request->input('country');
             $favouriteAuthor = $request->input('favourite_author');
+            $favouriteGenre = $request->input('favourite_genre');
             $currentlyReading = $request->input('currently_reading');
             $facebookAccount = $request->input('facebook_account');
             $twitterAccount = $request->input('twitter_account');
@@ -200,6 +201,9 @@ class UserController extends Controller
             };
             if (isset($favouriteAuthor)) {
                 $user->favourite_author = $favouriteAuthor;
+            };
+            if (isset($favouriteGenre)) {
+                $user->favourite_genre = $favouriteGenre;
             };
             if (isset($currentlyReading)) {
                 $user->currently_reading = $currentlyReading;
