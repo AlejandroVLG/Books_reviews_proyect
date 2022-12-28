@@ -120,11 +120,11 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'string|max:100',
                 'last_name' => 'string|max:100',
-                'nick_name' => 'string|max:100|unique:users',
-                'email' => 'string|email|max:255|unique:users',
+                'nick_name' => 'string|max:100',
+                'email' => 'string|email|max:255',
                 'password' => 'string|min:6',
-                'gender' => 'string|min:4|max:6',
-                'age' => 'integer|max:200',
+                'gender' => 'string',
+                'age' => 'string',
                 'country' => 'string',
                 'favourite_author' => 'string',
                 'favourite_genre' => 'string',
@@ -132,7 +132,7 @@ class UserController extends Controller
                 'facebook_account' => 'string',
                 'twitter_account' => 'string',
                 'instagram_account' => 'string',
-                'profile_img' => 'url'
+                'profile_img' => 'string'
             ]);
 
             if ($validator->fails()) {

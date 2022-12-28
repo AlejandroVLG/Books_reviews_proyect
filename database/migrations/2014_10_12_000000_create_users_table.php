@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('gender')->nullable();
-            $table->integer('age')->nullable();
+            $table->string('age')->nullable();
             $table->string('country')->nullable();
             $table->string('favourite_author')->nullable();
             $table->string('favourite_genre')->nullable();
