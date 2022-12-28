@@ -269,7 +269,7 @@ class UserController extends Controller
                 );
             }
 
-            $user->delete();
+            $user->delete($userId);
 
             return response()->json(
                 [
