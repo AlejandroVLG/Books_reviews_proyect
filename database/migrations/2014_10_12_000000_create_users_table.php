@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name')->nullable();
             $table->string('nick_name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
             $table->string('gender')->nullable();
             $table->string('age')->nullable();
@@ -27,9 +27,9 @@ return new class extends Migration
             $table->string('favourite_author')->nullable();
             $table->string('favourite_genre')->nullable();
             $table->string('currently_reading')->nullable();
-            $table->string('facebook_account')->unique()->nullable();
-            $table->string('twitter_account')->unique()->nullable();
-            $table->string('instagram_account')->unique()->nullable();
+            $table->string('facebook_account')->nullable();
+            $table->string('twitter_account')->nullable();
+            $table->string('instagram_account')->nullable();
             $table->string('profile_img')->nullable();
             $table->timestamps();
         });
