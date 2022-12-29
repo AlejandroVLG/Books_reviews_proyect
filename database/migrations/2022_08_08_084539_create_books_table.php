@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string('shop_url');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
