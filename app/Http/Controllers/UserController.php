@@ -256,7 +256,6 @@ class UserController extends Controller
             $userId = auth()->user()->id;
 
             $user = User::query()
-                ->where('user_id', '=', $userId)
                 ->find($userId);
 
             if (!$user) {
