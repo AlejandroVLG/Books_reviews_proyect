@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('review_title');
             $table->integer('score');
             $table->longText('message');
-            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

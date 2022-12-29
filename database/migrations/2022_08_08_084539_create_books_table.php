@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('book_cover');
             $table->string('author_wiki_url');
             $table->string('shop_url');
-            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
