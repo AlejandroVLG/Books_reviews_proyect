@@ -39,7 +39,7 @@ class AuthController extends Controller
                 'facebook_account' => 'string',
                 'twitter_account' => 'string',
                 'instagram_account' => 'string',
-                'profile_img' => 'url'
+                'profile_img' => 'string'
             ]);
 
             if ($validator->fails()) {
