@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Exception;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -23,7 +24,6 @@ class UserController extends Controller
             Log::info('Showing my profile');
 
             return response()->json(auth()->user(), 200);;
-
         } catch (Exception $exception) {
 
             Log::error("Error showing my profile" . $exception->getMessage());
@@ -72,7 +72,7 @@ class UserController extends Controller
         }
     }
 
-    
+
     /////////////////////////////////////////////////////////////////////////////////
     ////////////<------------------- SHOW USER BY ID ------------------>//////////////
     /////////////////////////////////////////////////////////////////////////////////

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('last_name')->nullable();
-            $table->string('nick_name');
-            $table->string('email');
+            $table->string('nick_name')->unique();
+            $table->string('email')->unique();
             $table->string('password');
             $table->string('gender')->nullable();
             $table->string('age')->nullable();
