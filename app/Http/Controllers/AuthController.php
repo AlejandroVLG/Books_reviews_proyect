@@ -67,7 +67,7 @@ class AuthController extends Controller
                 'facebook_account' => $request->get('facebook_account'),
                 'twitter_account' => $request->get('twitter_account'),
                 'instagram_account' => $request->get('instagram_account'),
-                'profile_img' => "../../../public/img/ProfileImg.jpg"
+                'profile_img' => "https://www.pngitem.com/pimgs/m/421-4213053_default-avatar-icon-hd-png-download.png"
             ]);
 
             $users = User::all();
