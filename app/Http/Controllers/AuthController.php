@@ -38,8 +38,7 @@ class AuthController extends Controller
                 'currently_reading' => 'string',
                 'facebook_account' => 'string',
                 'twitter_account' => 'string',
-                'instagram_account' => 'string',
-                'profile_img' => 'string'
+                'instagram_account' => 'string'
             ]);
 
             if ($validator->fails()) {
@@ -53,7 +52,7 @@ class AuthController extends Controller
                 );
             }
 
-            $user = User::create([
+            $user = User::query()->create([
                 'name' => $request->get('name'),
                 'last_name' => $request->get('last_name'),
                 'nick_name' => $request->get('nick_name'),
@@ -68,7 +67,7 @@ class AuthController extends Controller
                 'facebook_account' => $request->get('facebook_account'),
                 'twitter_account' => $request->get('twitter_account'),
                 'instagram_account' => $request->get('instagram_account'),
-                'profile_img' => $request->get('profile_img'),
+                'profile_img' => "../../../public/img/ProfileImg.jpg"
             ]);
 
             $users = User::all();

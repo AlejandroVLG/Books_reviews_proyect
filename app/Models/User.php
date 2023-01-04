@@ -32,7 +32,8 @@ class User extends Authenticatable implements JWTSubject
         'currently_reading',
         'facebook_account',
         'twitter_account',
-        'instagram_account'
+        'instagram_account',
+        'profile_img'
     ];
 
     /**
