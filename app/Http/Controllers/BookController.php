@@ -100,6 +100,7 @@ class BookController extends Controller
                 ->join('users', 'books.user_id', '=', 'users.id')
                 ->select(
                     'books.id',
+                    'users.id as user_id',
                     'users.name',
                     'books.title',
                     'books.synopsis',
