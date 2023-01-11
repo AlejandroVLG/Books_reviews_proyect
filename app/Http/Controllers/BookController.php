@@ -208,13 +208,25 @@ class BookController extends Controller
             $book = Book::query()->where('user_id', '=', $userId)->find($id);
 
             if (!$book) {
-                return response()->json(
-                    [
-                        'success' => false,
-                        'message' => "Book doesn't exists"
-                    ],
-                    404
-                );
+
+                if ($userId != $id) {
+                    return response()->json(
+                        [
+                            'success' => false,
+                            'message' => "El usuario no puede modificar este libro"
+                        ],
+                        404
+                    );
+                } else {
+
+                    return response()->json(
+                        [
+                            'success' => false,
+                            'message' => "Book doesn't exists"
+                        ],
+                        404
+                    );
+                }
             }
 
             $title = $request->input('title');
