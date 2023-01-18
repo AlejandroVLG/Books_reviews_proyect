@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('author');
             $table->string('genre');
             $table->string('year');
-            $table->string('book_cover');
+            $table->longText('book_cover');
             $table->string('author_wiki_url');
-            $table->string('shop_url');
+            $table->longText('shop_url');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
