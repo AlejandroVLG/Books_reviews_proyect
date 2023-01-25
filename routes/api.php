@@ -17,6 +17,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('book/showAllBooks', [BookController::class, 'showAllBooks']);
 Route::get('book/showBookById/{id}', [BookController::class, 'showBookById']);
+Route::get('review/searchReviewByBookId/{id}', [ReviewController::class, 'searchReviewByBookId']);
 
 ///////////////// USER ENDPOINTS QUE REQUIEREN AUTENTIFICACIÓN //////////////////////
 
@@ -54,7 +55,6 @@ Route::group(["middleware" => "jwt.auth"], function () {
     Route::get('review/searchReviewByUserName/{name}', [ReviewController::class, 'searchReviewByUserName']);
     Route::get('review/showReviewsOrderedByScoreDesc', [ReviewController::class, 'showReviewsOrderedByScoreDesc']);
     Route::get('review/showReviewsOrderedByScoreAsc', [ReviewController::class, 'showReviewsOrderedByScoreAsc']);
-    Route::get('review/searchReviewByBookId/{id}', [ReviewController::class, 'searchReviewByBookId']);
 });
 
 //////////////// ENDPOINTS QUE REQUIEREN EL MIDDLEWARE "IsAdmin" ///////////////////////
